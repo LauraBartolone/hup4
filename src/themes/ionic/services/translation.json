@@ -1,0 +1,56 @@
+{
+  "en" : {
+    "welcome": "Welcome!",
+    "createEvent": "Create your event!",
+    "guestJoin": "Partecipa da invitato",
+    "home": {
+      "eventCodeTitle": "Inserisci il codice evento",
+      "note": "Note dei festeggiati"
+    },
+    "category": {
+      "wedding": "Wedding",
+      "graduate": "Graduation",
+      "party": "Party",
+      "holy": "Holy event",
+      "birthday": "Birthday"
+    },
+    "dashboard": {
+      "boardWishes": "Bacheca auguri"
+    },
+    "createEventPage": {
+      "eventName": "Nome evento",
+      "eventDate": "Data evento",
+      "eventNote": "Note per gli invitati",
+      "eventNoteSubtitle": "* Le note verranno mostrate agli invitati prima dell'inizio dell’evento",
+      "eventAdvanced": "Impostazioni avanzate",
+      "eventCreationBtn": "CREA EVENTO"
+    }
+  },
+  "it" : {
+    "welcome": "Welcome!",
+    "createEvent": "Crea il tuo evento!",
+    "guestJoin": "Partecipa da invitato",
+    "home": {
+      "eventCodeTitle": "Inserisci il codice evento",
+      "note": "Note dei festeggiati"
+    },
+    "category": {
+      "wedding": "Wedding",
+      "graduate": "Graduation",
+      "party": "Party",
+      "holy": "Holy event",
+      "birthday": "Birthday"
+    },
+    "dashboard": {
+      "boardWishes": "Bacheca auguri"
+    },
+    "createEventPage": {
+      "eventName": "Nome evento",
+      "eventDate": "Data evento",
+      "eventNote": "Note per gli invitati",
+      "eventNoteSubtitle": "* Le note verranno mostrate agli invitati prima dell'inizio dell’evento",
+      "eventAdvanced": "Impostazioni avanzate",
+      "eventCreationBtn": "CREA EVENTO"
+    }
+  }
+}

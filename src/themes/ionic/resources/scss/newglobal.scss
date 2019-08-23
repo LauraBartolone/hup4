@@ -1,0 +1,63 @@
+.md ion-menu[type=overlay] .menu-inner {
+  // clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  animation: polygons 0.35s alternate;
+}
+
+@keyframes polygons {
+25% {
+  clip-path: ellipse(78% 100% at 10% 50%);
+}
+50% {
+  clip-path: ellipse(78% 100% at 10% 50%);
+}
+75% {
+  clip-path: ellipse(78% 100% at 10% 50%);
+}
+}
+
+ion-navbar[color~='primary'] {
+  &.toolbar {
+    border-bottom: 1px solid #fff;
+  }
+}
+
+ion-header.no-shadow.header::after {
+  width: 0;
+}
+
+.text-primary {
+  color: $colorPrimary;
+}
+
+.tip-text {
+  color: $colorPrimary;
+  border-radius: 2px;
+  height: fit-content;
+  text-align: center;
+  box-shadow: 0px 9px 9px 0px rgba(0, 0, 0, 0.6), 0 0 8px 0 rgba(0, 0, 0, 0.5);
+  background: #fffffff1;
+}
+
+.list-no-padding {
+  ion-item.item {
+    padding: 0;
+  }
+}
+
+.bg-secondary-gradient {
+  background-image: linear-gradient(to right bottom, #ffdfca, #ffe2da, #ffede8, #fff5ef, #fefbf6, #fffffc, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff);
+}
+
+
+ion-content.bg-primary-gradient {
+  --background: linear-gradient(180deg, #D94F67 0%, #F78F78 100%);
+}
+
+
+
+button[disabled] {
+  opacity: 0.5!important;
+  background-color: darkgray;
+  color: #fff;
+}
+

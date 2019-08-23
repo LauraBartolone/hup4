@@ -1,0 +1,26 @@
+
+.form-default {
+  ion-label.label {
+    @extend .mono;
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
+  }
+  ion-item.item-input, ion-item.item-datetime {
+    margin-bottom: 1.7rem;
+  }
+
+  .datetime-text {
+    margin-bottom: 6px;
+  }
+
+  ion-item {
+    padding-left: 0;
+  }
+
+  .label-note {
+    margin-top: -10px;
+    text-align: left;
+    // @extend .small;
+  }
+}

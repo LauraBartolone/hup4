@@ -43,16 +43,22 @@
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
+    "@ionic/storage": "^2.2.0",
+    "@ngx-translate/core": "^11.0.1",
+    "@ngx-translate/http-loader": "^4.0.0",
+    "bootstrap": "^4.1.3",
     "cordova": "^9.0.0",
     "cordova-android": "8.0.0",
     "core-js": "^2.5.4",
     "ionic": "^5.2.5",
     "native-run": "^0.2.8",
+    "node-sass": "^4.12.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
+    "webpack-merge": "4.1.1",
     "@angular-devkit/architect": "~0.801.2",
     "@angular-devkit/build-angular": "~0.801.2",
     "@angular-devkit/core": "~8.1.2",
@@ -83,6 +89,15 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
+  },
+  "config": {
+    "ionic_bundler": "webpack",
+    "ionic_app_ng_module_path": "./src/app/module.ts",
+    "ionic_sass": "./config/sass.config.js",
+    "ionic_uglifyjs": "./config/uglifyjs.config.js",
+    "ionic_webpack": "./config/webpack.config.js",
+    "ionic_copy": "./config/copy.config.js",
+    "ionic_source_map_type": "#inline-source-map"
   },
   "cordova": {
     "plugins": {
