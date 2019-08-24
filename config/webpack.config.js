@@ -124,6 +124,7 @@ var prodConfig = {
     alias: {
       '@bwl': path.join(__dirname, '..', 'src', 'bwl'),
       '@theme': path.join(__dirname, '..', 'src', 'themes', 'ionic'),
+      '@assets': path.join(__dirname, '..', 'src', 'themes', 'ionic', 'assets'),
       '@env': path.join(__dirname, '..', 'src', 'environments'),
       '@app': path.join(__dirname, '..', 'src', 'app')
     },

@@ -1,3 +1,4 @@
+::ng-deep {
 .md ion-menu[type=overlay] .menu-inner {
   // clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
   animation: polygons 0.35s alternate;
@@ -54,10 +55,10 @@ ion-content.bg-primary-gradient {
 }
 
 
-
 button[disabled] {
   opacity: 0.5!important;
   background-color: darkgray;
   color: #fff;
 }
 
+}

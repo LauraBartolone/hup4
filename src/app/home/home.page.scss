@@ -1,3 +1,25 @@
-ion-content.bg-primary-gradient {
-  --background: linear-gradient(180deg, #D94F67 0%, #F78F78 100%);
-}
+page-home {
+ 
+    div.scroll-content {
+      padding: 0px;
+    }
+  
+    .input-code {
+      font-weight: bold;
+      color: #000000;
+      text-align: center;
+      input {
+        text-align: center;
+  
+        &::placeholder {
+          color: #AAAAAA;
+          text-align: center;
+        }
+        letter-spacing: 12px;
+      }
+      &.item-input {
+        background: #ffffff;
+      }
+    }
+  }
+  

@@ -1,5 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content padding class="bg-primary-gradient text-center">
-    <img src="../assets/img/home.svg" class="mt-5">
-    <ion-button expand="block" large color="secondary" class="mb-4" (click)="goToCreateEvent()">{{'createEvent' | translate | uppercase }}</ion-button>
-    <ion-button expand="block" large color="primary" (click)="goToHome()">{{'guestJoin' | translate | uppercase }}</ion-button>
+  <img class="cover-img" src="assets/imgs/category-cover1.jpg">
+
+  <p class="text-20 text-white w-50 mx-auto">{{ 'home.eventCodeTitle' | translate}}</p>
+
+  <ion-item class="input-code mt-2">
+    <ion-input type="text" placeholder="CAGD02"></ion-input>
+  </ion-item>
+
+  <ion-button center large color="primary" class="my-4" routerLink="/dashboard" routerDirection="root">VAI!</ion-button>
+
+  <p class="text-20 text-white mt-5">{{ 'home.note' | translate}}</p>
+  <p class="text-white">Lorem ipsum dolor sit amet,  consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+
+
 </ion-content>

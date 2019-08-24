@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePage } from './home.page';
+import { CreateEventCategoryPage } from './create-event-category.page';
 import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
+    component: CreateEventCategoryPage
   }
 ];
 
@@ -23,6 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     TranslateModule
   ],
-  declarations: [HomePage]
+  declarations: [CreateEventCategoryPage]
 })
-export class HomePageModule {}
+export class CreateEventCategoryPageModule {}

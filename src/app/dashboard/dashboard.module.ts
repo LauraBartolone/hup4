@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -5,13 +6,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePage } from './home.page';
-import { TranslateModule } from '@ngx-translate/core';
+import { DashboardPage } from './dashboard.page';
+import { PostImageModule } from '../components/post-image/module';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
+    component: DashboardPage
   }
 ];
 
@@ -21,8 +22,9 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    TranslateModule
+    TranslateModule,
+    PostImageModule
   ],
-  declarations: [HomePage]
+  declarations: [DashboardPage]
 })
-export class HomePageModule {}
+export class DashboardPageModule {}

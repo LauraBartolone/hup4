@@ -1,0 +1,24 @@
+.image-link-default {
+  position: absolute;
+  margin-top: -36px;
+  height: 36px;
+  font-size: 16px;
+  color: white;
+  font-weight: 500;
+  background: rgba(151, 46, 63, 0.534);
+  .text-link {
+    line-height: 36px;
+    margin: 0;
+    text-align: right;
+    span ion-icon {
+      margin: 0 10px;
+      vertical-align: text-bottom;
+    }
+  }
+}
+
+.post-image {
+  margin: 3px;
+}
+  
+  

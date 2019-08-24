@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>create-event-category</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding class="bg-primary-gradient">
+  <div class="text-center">
+    <h3 class="page-title text-white">Che tipo di evento vuoi creare?</h3>
+
+    <div class="row mx-5">
+      <div class="col-6 mb-4 col-md-3" *ngFor="let category of ['wedding', 'birthday', 'graduate', 'holy', 'party', 'other']; let i = index">
+        <div class="category-btn" tappable (click)="goToCreateEvent(i)">
+          <img *ngIf="category!='other'" [src]="'assets/icon/'+category+'.svg'">
+          <h3 *ngIf="category==='other'" class="h3 primary-text">Altro</h3>
+        </div>
+        <h6 class="text-white pt-2" *ngIf="category!='other'">{{ 'category.'+category | translate }}</h6>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>
