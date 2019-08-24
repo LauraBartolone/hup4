@@ -105,4 +105,13 @@ $font-path: "../assets/fonts";
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /*input*/
+  $text-input-highlight-color-valid:#fff;
+  $text-input-highlight-color-invalid:#fff;
+  --item-inner-highlight: #ffffff;
+  --highlight-color-valid: #ffffff;
+
+  --ion-item-border-color: #ffffff;
+  --ion-item-border-color: #ffffff;
 }

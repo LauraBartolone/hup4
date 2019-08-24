@@ -1,0 +1,25 @@
+.avatar {
+  padding: 25px 0;
+  img {
+    width: 102px;
+    height: 102px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    object-fit: cover;
+  }
+  .small-fab {
+    position: absolute;
+    top: 73px;
+    margin-left: 80px;
+  }
+}
+.small-fab {
+  ion-fab-button {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+

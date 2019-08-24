@@ -1,26 +1,39 @@
 
-.form-default {
-  ion-label.label {
-    @extend .mono;
-    font-weight: 600;
-    font-size: 1.2rem;
-    letter-spacing: 0.1rem;
-  }
-  ion-item.item-input, ion-item.item-datetime {
-    margin-bottom: 1.7rem;
-  }
+::ng-deep {
+  .form-default {
+    ion-label.label {
+      @extend .mono;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 0.1rem;
+    }
+    ion-item.item-input, ion-item.item-datetime {
+      margin-bottom: 1.7rem;
+    }
 
-  .datetime-text {
-    margin-bottom: 6px;
-  }
+    .datetime-text {
+      margin-bottom: 6px;
+    }
 
-  ion-item {
-    padding-left: 0;
-  }
+    ion-item {
+      padding-left: 0;
+    }
 
-  .label-note {
-    margin-top: -10px;
-    text-align: left;
-    // @extend .small;
+    .label-note {
+      margin-top: -10px;
+      text-align: left;
+      font-size: 14px;
+    }
+    ion-input, ion-datetime {
+      --color: #ffffff;
+      --placeholder-color: var(--ion-color-secondary);     /* placeholder text color */
+      --border-color: #ffffff;
+    }
+
+    ion-item {
+      color: #ffffff;
+      border-bottom: 1px solid #ffffff;
+      --color: var(#c8c7cc,#c8c7cc);
+    }
   }
 }

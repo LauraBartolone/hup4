@@ -14,6 +14,6 @@ export class CreateEventCategoryPage implements OnInit {
   }
 
   public goToCreateEvent(category: number) {
-    this.router.navigateByUrl('/create-event-category');
+    this.router.navigate(['/create-event', category]);
   }
 }
