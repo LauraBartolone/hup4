@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-event-settings-modal',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventSettingsModalPage implements OnInit {
 
-  constructor() { }
+  constructor(public modalCtrl: ModalController) { }
 
   ngOnInit() {
+  }
+
+  public closeModal() {
+    this.modalCtrl.dismiss();
   }
 
 }

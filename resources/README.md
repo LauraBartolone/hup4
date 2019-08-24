@@ -6,3 +6,6 @@ Cordova reference documentation:
 
 - Icons: https://cordova.apache.org/docs/en/latest/config_ref/images.html
 - Splash Screens: https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-splashscreen/
+
+Generate resource splashscreen and icon
+ionic cordova resources --cordova-res
