@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { EventSettingsModalPage } from '../modal/event-settings-modal/settings-modal.page';
 
 @Component({
   selector: 'app-create-event',
@@ -13,7 +15,8 @@ export class CreateEventPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public modalController: ModalController
     ) {
     this.createEventForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -33,7 +36,11 @@ export class CreateEventPage implements OnInit {
     console.log(ev, this.createEventForm.value);
   }
 
-  public openModalSettings() {
+  public async openModalSettings() {
+    const modal = await this.modalController.create({
+      component: EventSettingsModalPage
+    });
+    return await modal.present();
     // const modal: Modal = this.modalController.create(EventSettingsModal);
     //   modal.present();
   }

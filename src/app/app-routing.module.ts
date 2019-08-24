@@ -8,7 +8,6 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
   { path: 'create-event-category', loadChildren: './create-event-category/create-event-category.module#CreateEventCategoryPageModule' },
   { path: 'create-event/:eventCategory', loadChildren: './create-event/create-event.module#CreateEventPageModule' },
-
 ];
 
 @NgModule({

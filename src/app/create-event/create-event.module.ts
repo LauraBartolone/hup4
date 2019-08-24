@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { CreateEventPage } from './create-event.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { EventSettingsModalPageModule } from '../modal/event-settings-modal/settings-modal.module';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    TranslateModule
+    TranslateModule,
+    EventSettingsModalPageModule
   ],
   declarations: [CreateEventPage]
 })

@@ -36,4 +36,13 @@
       --color: var(#c8c7cc,#c8c7cc);
     }
   }
+
+  ion-toggle.toggle-default {
+    zoom: 0.8;
+    --background: rgb(151, 101, 101);
+    --background-checked: rgb(68, 21, 21);
+    --handle-background: #ffffff;
+    --handle-background-checked: #C83B54;
+  }
+
 }
