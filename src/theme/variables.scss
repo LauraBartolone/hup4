@@ -24,7 +24,14 @@ $font-path: "../assets/fonts";
   font-weight: 600;
   src: url($font-path + "/RobotoMono-Bold.ttf");
 }
-
+::ng-deep {
+  $colorPrimary: #C83B54!default;
+  $rating-worse: #D75C40 !default;
+  $rating-bad: #F06748 !default;
+  $rating-good: #FFA726 !default;
+  $rating-better: #7CB342 !default;
+  $rating-best: #6FA03B !default;
+}
 :root,
 :root[mode=ios],
 :root[mode=md] {

@@ -54,11 +54,34 @@ ion-content.bg-primary-gradient {
   --background: linear-gradient(180deg, #D94F67 0%, #F78F78 100%);
 }
 
+ion-content.bg-welcome {
+  --background: #f7f7f7;
+}
+
 
 button[disabled] {
   opacity: 0.5!important;
   background-color: darkgray;
   color: #fff;
+}
+
+
+.avatar {
+  padding: 25px 0;
+  img {
+    width: 102px;
+    height: 102px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    object-fit: cover;
+  }
+  .small-fab {
+    position: absolute;
+    top: 73px;
+    margin-left: 80px;
+  }
 }
 
 }

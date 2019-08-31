@@ -1,0 +1,49 @@
+<ion-content padding class="bg-primary-gradient">
+  <div class="text-white">
+    <h3 class="mb-5 mt-5">Login</h3>
+    <form [formGroup]="loginForm" (submit)="onSubmit(($event))" class="form-default">
+      <ion-item color="transparent" lines="none" no-padding>
+        <ion-label color="secondary" position="stacked">Username</ion-label>
+        <ion-input type="text" formControlName="username"></ion-input>
+      </ion-item>
+
+      <ion-item color="transparent" lines="none" no-padding>
+        <ion-label color="secondary" position="stacked">Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <ion-button type="submit" expand="block" large color="secondary" class="mt-5"
+      >
+        ACCEDI
+      </ion-button>
+      <p class="my-4">Non hai un'account?
+        <a class="secondary-text"
+        tappable
+        routerLink="/registration"><u>Registrati</u>
+        </a>
+      </p>
+
+      <p class="text-center mt-4">Oppure</p>
+      <ion-button type="submit" expand="block" large color="secondary" class="mt-2"
+      >
+       <ion-icon name="logo-google" class="mr-3"></ion-icon>
+       ACCEDI CON GOOGLE
+      </ion-button>
+      <ion-button type="submit" expand="block" large color="secondary" class="mt-2"
+      >
+        <ion-icon name="logo-facebook" class="mr-3"></ion-icon>
+        ACCEDI CON FACEBOOK
+      </ion-button>
+
+      <p class="my-4">Non ricordi la tua password?
+        <a class="secondary-text"
+        tappable
+        routerLink="/pw-recovery"><u>Recuperala</u>
+        </a>
+      </p>
+    </form>
+
+  </div>
+
+</ion-content>
+
+

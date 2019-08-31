@@ -1,6 +1,7 @@
 {
     "welcome": "Welcome!",
-    "createEvent": "Crea il tuo evento!",
+    "createEvent": "Crea il mio evento!",
+    "menuCreateEvent": "Crea evento",
     "guestJoin": "Partecipa da invitato",
     "home": {
         "eventCodeTitle": "Inserisci il codice evento",

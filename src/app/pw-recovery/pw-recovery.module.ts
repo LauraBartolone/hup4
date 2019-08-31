@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePage } from './home.page';
+import { PwRecoveryPage } from './pw-recovery.page';
 import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
+    component: PwRecoveryPage
   }
 ];
 
@@ -20,9 +20,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
+    ReactiveFormsModule,
     TranslateModule,
+    RouterModule.forChild(routes)
   ],
-  declarations: [HomePage]
+  declarations: [PwRecoveryPage]
 })
-export class HomePageModule {}
+export class PwRecoveryPageModule {}
