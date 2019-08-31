@@ -1,16 +1,16 @@
 page-home {
- 
+
     div.scroll-content {
       padding: 0px;
     }
-  
+
     .input-code {
       font-weight: bold;
       color: #000000;
       text-align: center;
       input {
         text-align: center;
-  
+
         &::placeholder {
           color: #AAAAAA;
           text-align: center;
@@ -22,4 +22,7 @@ page-home {
       }
     }
   }
-  
+
+  ion-content.menu-margin {
+    --offset-top: var(-56px);
+  }

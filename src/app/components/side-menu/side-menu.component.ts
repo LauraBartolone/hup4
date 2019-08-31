@@ -37,7 +37,6 @@ export class SideMenuComponent implements OnInit {
   }
 
   public openMenu() {
-    console.log('pop');
     this.menu.toggle();
   }
 }

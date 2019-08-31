@@ -26,9 +26,4 @@ export class HomePage {
     this.menu.details.next(sideLinks);
   }
 
-  public openMenu() {
-    console.log('pop');
-    this.menu.toggle();
-  }
-
 }

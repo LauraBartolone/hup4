@@ -1,11 +1,17 @@
 #slidingMenu {
-    ion-item {
-      --border-color: var(--ion-color-primary);
-      --detail-icon-color: var(--ion-color-primary);
-      --detail-icon-opacity: 1;
-    }
+  ion-item {
+    --border-color: var(--ion-color-primary);
+    --detail-icon-color: var(--ion-color-primary);
+    --detail-icon-opacity: 1;
+  }
 }
 
-ion-header {
-  // z-index: 1000000000000000000;
+ion-menu {
+  margin-top: 56px;
+  &:not(.show-menu) {
+    z-index: 0;
+  }
+  &.show-menu {
+    z-index: 200000000000000;
+  }
 }
