@@ -4,6 +4,7 @@ import { Facebook } from '@ionic-native/facebook/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { LoadingController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class FacebookService {
     private fb: Facebook,
     private nativeStorage: NativeStorage,
     public loadingController: LoadingController,
+    public apiService: ApiService,
     private router: Router,
     private platform: Platform,
   ) { }
@@ -33,25 +35,44 @@ export class FacebookService {
     .then(response => {
       const userId = response.authResponse.userID;
       console.log(response);
-      // Getting name and gender properties
-      this.fb.api('/me?fields=name,email', permissions)
-      .then(user => {
-        user.picture = 'https://graph.facebook.com/' + userId + '/picture?type=large';
-        // now we have the users info, let's save it in the NativeStorage
-        this.nativeStorage.setItem('facebook_user',
+    //   authResponse: {
+    //     session_key: boolean;
+    //     accessToken: string;
+    //     expiresIn: number;
+    //     sig: string;
+    //     secret: string;
+    //     userID: string;
+    // };
+
+      this.apiService.post('rest-auth/facebook/',
+        this.apiService.buildHeaders(),
         {
-          name: user.name,
-          email: user.email,
-          picture: user.picture
-        })
-        .then(() => {
-          // this.router.navigate(['/user']);
-          loading.dismiss();
-        }, error => {
-          console.log(error);
-          loading.dismiss();
+          access_token: response.authResponse.accessToken
+        }
+      ).subscribe(respData => {
+        console.log(respData);
+        // Getting name and gender properties
+        this.fb.api('/me?fields=name,email', permissions)
+        .then(user => {
+          user.picture = 'https://graph.facebook.com/' + userId + '/picture?type=large';
+          // now we have the users info, let's save it in the NativeStorage
+          this.nativeStorage.setItem('facebook_user',
+          {
+            token: respData.key,
+            name: user.name,
+            email: user.email,
+            picture: user.picture
+          })
+          .then(() => {
+            // this.router.navigate(['/user']);
+            loading.dismiss();
+          }, error => {
+            console.log(error);
+            loading.dismiss();
+          });
         });
       });
+
     }, error => {
       console.log(error);
       loading.dismiss();

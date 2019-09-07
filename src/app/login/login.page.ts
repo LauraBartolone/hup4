@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
-import { FacebookService } from '../services/facebook.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +14,6 @@ export class LoginPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    public fbService: FacebookService
     ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -36,7 +34,7 @@ export class LoginPage implements OnInit {
   }
 
   public fbLogin() {
-    this.fbService.doFbLogin();
+    this.userService.facebookLogin();
   }
 
 }
