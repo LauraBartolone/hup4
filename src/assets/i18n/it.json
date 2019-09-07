@@ -7,6 +7,23 @@
         "eventCodeTitle": "Inserisci il codice evento",
         "note": "Note dei festeggiati"
     },
+    "error": {
+      "required": "campo obbligatorio"
+    },
+    "auth": {
+      "username": "Username",
+      "password": "Password",
+      "register": "Registrati",
+      "login": {
+        "loginTitle": "Login",
+        "btnLogin": "ACCEDI",
+        "titlePage": "Login",
+        "noAccount": "Non hai un'account?",
+        "orLogin": "Oppure accedi tramite:",
+        "forgetPw": "Non ricordi la tua password?",
+        "recoveryIt": "Recuperala"
+      }
+    },
     "category": {
         "wedding": "Wedding",
         "graduate": "Graduation",

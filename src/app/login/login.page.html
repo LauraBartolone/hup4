@@ -1,43 +1,60 @@
-<ion-content padding class="bg-primary-gradient">
+<ion-header translucent="true" no-shadow no-border>
+  <ion-toolbar color="translucent" no-shadow no-border>
+    <ion-buttons slot="end">
+      <ion-back-button text="" icon="close"></ion-back-button>
+       <!-- defaultHref="welcome" -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="bg-primary-gradient" fullscreen="true">
   <div class="text-white">
-    <h3 class="mb-5 mt-5">Login</h3>
+    <h3 class="mb-4">{{'auth.login.loginTitle' | translate}}</h3>
     <form [formGroup]="loginForm" (submit)="onSubmit(($event))" class="form-default">
       <ion-item color="transparent" lines="none" no-padding>
-        <ion-label color="secondary" position="stacked">Username</ion-label>
+        <ion-label color="secondary" position="stacked">{{'auth.username' | translate}}</ion-label>
         <ion-input type="text" formControlName="username"></ion-input>
       </ion-item>
+      <div *ngIf="submitted && f.username.errors" class="form-error">
+        <p *ngIf="f.username.errors?.required">{{'error.required' | translate}}</p>
+      </div>
 
       <ion-item color="transparent" lines="none" no-padding>
-        <ion-label color="secondary" position="stacked">Password</ion-label>
+        <ion-label color="secondary" position="stacked">{{'auth.password' | translate}}</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
+      <div *ngIf="submitted && f.password.errors" class="form-error">
+        <p *ngIf="f.password.errors?.required">{{'error.required' | translate}}</p>
+      </div>
       <ion-button type="submit" expand="block" large color="secondary" class="mt-5"
       >
-        ACCEDI
+        {{'auth.login.btnLogin' | translate}}
       </ion-button>
-      <p class="my-4">Non hai un'account?
+      <p class="mt-3"> {{'auth.login.noAccount' | translate}}
         <a class="secondary-text"
         tappable
-        routerLink="/registration"><u>Registrati</u>
+        routerLink="/registration"><u>{{'auth.register' | translate}}</u>
         </a>
       </p>
 
-      <p class="text-center mt-4">Oppure</p>
-      <ion-button type="submit" expand="block" large color="secondary" class="mt-2"
-      >
-       <ion-icon name="logo-google" class="mr-3"></ion-icon>
-       ACCEDI CON GOOGLE
-      </ion-button>
-      <ion-button type="submit" expand="block" large color="secondary" class="mt-2"
-      >
-        <ion-icon name="logo-facebook" class="mr-3"></ion-icon>
-        ACCEDI CON FACEBOOK
-      </ion-button>
+      <p class="text-center mt-5"> {{'auth.login.orLogin' | translate}} </p>
+      <div class="inline-button">
+        <ion-button type="submit" large color="secondary"
+        >
+        <ion-icon name="logo-google" class="mr-3"></ion-icon>
+        GOOGLE
+        </ion-button>
+        <ion-button type="submit" large color="secondary" (click)="fbLogin()"
+        >
+          <ion-icon name="logo-facebook" class="mr-3"></ion-icon>
+          FACEBOOK
+        </ion-button>
+      </div>
 
-      <p class="my-4">Non ricordi la tua password?
+      <p class="mt-5">{{'auth.login.forgetPw' | translate}}
         <a class="secondary-text"
         tappable
-        routerLink="/pw-recovery"><u>Recuperala</u>
+        routerLink="/pw-recovery"><u>{{'auth.login.recoveryIt' | translate}} </u>
         </a>
       </p>
     </form>

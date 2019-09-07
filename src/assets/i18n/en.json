@@ -1,28 +1,45 @@
 {
-    "welcome": "Welcome!",
-    "createEvent": "Create my event!",
-    "menuCreateEvent": "Crea evento",
-    "guestJoin": "Partecipa da invitato",
-    "home": {
-    "eventCodeTitle": "Inserisci il codice evento",
-    "note": "Note dei festeggiati"
-    },
-    "category": {
-    "wedding": "Wedding",
-    "graduate": "Graduation",
-    "party": "Party",
-    "holy": "Holy event",
-    "birthday": "Birthday"
-    },
-    "dashboard": {
-    "boardWishes": "Bacheca auguri"
-    },
-    "createEventPage": {
-    "eventName": "Nome evento",
-    "eventDate": "Data evento",
-    "eventNote": "Note per gli invitati",
-    "eventNoteSubtitle": "* Le note verranno mostrate agli invitati prima dell'inizio dell’evento",
-    "eventAdvanced": "Impostazioni avanzate",
-    "eventCreationBtn": "CREA EVENTO"
+  "welcome": "Welcome!",
+  "createEvent": "Crea il mio evento!",
+  "menuCreateEvent": "Crea evento",
+  "guestJoin": "Partecipa da invitato",
+  "home": {
+      "eventCodeTitle": "Inserisci il codice evento",
+      "note": "Note dei festeggiati"
+  },
+  "error": {
+    "required": "campo obbligatorio"
+  },
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "register": "Registrati",
+    "login": {
+      "loginTitle": "Login",
+      "btnLogin": "ACCEDI",
+      "titlePage": "Login",
+      "noAccount": "Non hai un'account?",
+      "orLogin": "Oppure accedi tramite:",
+      "forgetPw": "Non ricordi la tua password?",
+      "recoveryIt": "Recuperala"
     }
+  },
+  "category": {
+      "wedding": "Wedding",
+      "graduate": "Graduation",
+      "party": "Party",
+      "holy": "Holy event",
+      "birthday": "Birthday"
+  },
+  "dashboard": {
+      "boardWishes": "Bacheca auguri"
+  },
+  "createEventPage": {
+      "eventName": "Nome evento",
+      "eventDate": "Data evento",
+      "eventNote": "Note per gli invitati",
+      "eventNoteSubtitle": "* Le note verranno mostrate agli invitati prima dell'inizio dell’evento",
+      "eventAdvanced": "Impostazioni avanzate",
+      "eventCreationBtn": "CREA EVENTO"
+  }
 }

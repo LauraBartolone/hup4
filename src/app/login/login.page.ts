@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserService } from '../services/user.service';
+import { FacebookService } from '../services/facebook.service';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +10,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginPage implements OnInit {
   public loginForm: FormGroup;
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
+    private userService: UserService,
+    public fbService: FacebookService
     ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -18,12 +23,20 @@ export class LoginPage implements OnInit {
     });
   }
 
+  get f() { return this.loginForm.controls; }
+
   public onSubmit(ev: any): void {
-    console.log(ev, this.loginForm.value);
+    this.submitted = true;
+    if (this.loginForm.valid) {
+      this.userService.login(this.loginForm.value);
+    }
   }
 
-
   ngOnInit() {
+  }
+
+  public fbLogin() {
+    this.fbService.doFbLogin();
   }
 
 }

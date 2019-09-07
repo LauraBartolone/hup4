@@ -11,18 +11,6 @@ export interface Api {
 }
 
 export class Utils {
-  static sigmoid(x: number): number {
-    return (1 / (1 + Math.pow(Math.E, -x)));
-  }
-
-  static cos(degrees: number): number {
-    return Math.cos(degrees * Math.PI / 180);
-  }
-
-  static sin(degrees: number): number {
-    return Math.sin(degrees * Math.PI / 180);
-  }
-
   static equals<T>(value: T, ...comparables: T[]): boolean {
     return !!(comparables.find(comparable => value === comparable));
   }
@@ -497,12 +485,6 @@ export class Utils {
     // if (re.test(cardNumber))
     //   return 'jcb';
 
-    // TODO: DA SCIPPARE
-    if (cardNumber === '5017670000005900') {
-      // this.type = 'CB';
-      return 'CB';
-    }
-
     // Visa Electron
     re = new RegExp(/^(4026|417500|4508|4844|491(3|7))/);
     if (re.test(cardNumber)) {
@@ -569,19 +551,19 @@ export interface Environment {
   };
 }
 
-export function getApiUrl(ENV: Environment): string {
-  if (Utils.isNotDefined(ENV.API)) {
-    return '';
-  }
+// export function getApiUrl(ENV: Environment): string {
+//   if (Utils.isNotDefined(ENV.API)) {
+//     return '';
+//   }
 
-  switch (ENV.TARGET) {
-    case 'development':
-      return ENV.API.DEVELOPMENT;
-    case 'production':
-      return ENV.API.PRODUCTION;
-    case 'stage':
-      return Utils.isDefined(ENV.API.STAGE) ? ENV.API.STAGE : '';
-    default:
-      return '';
-  }
-}
+//   switch (ENV.TARGET) {
+//     case 'development':
+//       return ENV.API.DEVELOPMENT;
+//     case 'production':
+//       return ENV.API.PRODUCTION;
+//     case 'stage':
+//       return Utils.isDefined(ENV.API.STAGE) ? ENV.API.STAGE : '';
+//     default:
+//       return '';
+//   }
+// }

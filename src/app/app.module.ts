@@ -7,6 +7,9 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +18,9 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { MenuService } from './services/menu.service';
 import { CoreService } from './services/core.service';
+import { ApiService } from './services/api.service';
+import { UserService } from './services/user.service';
+import { FacebookService } from './services/facebook.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -44,8 +50,13 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     MenuService,
+    ApiService,
+    UserService,
     CoreService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    Facebook,
+    FacebookService,
+    NativeStorage,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })

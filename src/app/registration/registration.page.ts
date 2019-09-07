@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MustMatch } from '../form/validators/validators';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -8,21 +10,33 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegistrationPage implements OnInit {
   public registrationForm: FormGroup;
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
+    private userService: UserService
     ) {
     this.registrationForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['',   Validators.compose(
+        [ Validators.required,  Validators.email])],
       username: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-
+      password1: ['', Validators.compose(
+        [ Validators.required,  Validators.minLength(8)])],
+      password2: ['', Validators.required],
+    },
+    {
+      validator: MustMatch('password1', 'password2')
     });
   }
 
+  // convenience getter for easy access to form fields
+  get f() { return this.registrationForm.controls; }
+
   public onSubmit(ev: any): void {
-    console.log(ev, this.registrationForm.value);
+    this.submitted = true;
+    if (this.registrationForm.valid) {
+      this.userService.registration(this.registrationForm.value);
+    }
   }
 
   ngOnInit() {
