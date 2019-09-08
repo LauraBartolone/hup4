@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { EventSettingsModalPage } from '../modal/event-settings-modal/settings-modal.page';
+import * as moment from 'moment';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-create-event',
@@ -11,20 +13,25 @@ import { EventSettingsModalPage } from '../modal/event-settings-modal/settings-m
   styleUrls: ['./create-event.page.scss'],
 })
 export class CreateEventPage implements OnInit {
+  momentjs: any = moment;
   public createEventForm: FormGroup;
   public eventCategory: number;
   public eventImg: string;
-  public minDate = '2019';
+  public minDate = this.momentjs(new Date()).format('YYYY-MM-DD');
+
+  public requestData;
 
   constructor(
     private camera: Camera,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public apiService: ApiService,
     ) {
+    console.log(this.minDate);
     this.createEventForm = this.formBuilder.group({
       name: ['', Validators.required],
-      code: ['', Validators.required],
+      note: ['', Validators.required],
       date: ['', Validators.required],
     });
     this.route.params.subscribe(params => {
@@ -38,7 +45,21 @@ export class CreateEventPage implements OnInit {
   }
 
   public onSubmit(ev: any): void {
-    console.log(ev, this.createEventForm.value);
+    this.requestData = {
+      date: this.momentjs(new Date(this.createEventForm.value.date)).format('YYYY-MM-DD'),
+      note: this.createEventForm.value.note,
+      category: this.eventCategory,
+      name: this.createEventForm.value.name
+    };
+
+    this.apiService.post('events/',
+      this.apiService.buildHeaders(),
+      this.requestData
+    ).subscribe((resp) => {
+
+      console.log(resp);
+    });
+
   }
 
   public async openModalSettings() {
@@ -59,9 +80,9 @@ export class CreateEventPage implements OnInit {
       sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
     };
     this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
       this.eventImg = 'data:image/jpeg;base64,' + imageData;
+      // tslint:disable-next-line:no-string-literal
+      this.requestData['image'] = this.eventImg;
       console.log(this.eventImg);
      }, (err) => {
       // Handle error

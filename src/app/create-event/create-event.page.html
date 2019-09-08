@@ -25,12 +25,12 @@
 
       <ion-item color="transparent" lines="none" no-padding>
           <ion-label color="secondary" position="stacked">{{ 'createEventPage.eventDate' | translate}}</ion-label>
-          <ion-datetime max="2050" min="2019" color="secondary" displayFormat="DD/MM/YYYY" formControlName="date"></ion-datetime>
+          <ion-datetime max="2050" [min]="minDate" color="secondary" displayFormat="DD/MM/YYYY" formControlName="date"></ion-datetime>
       </ion-item>
 
       <ion-item color="transparent" lines="none" no-padding>
         <ion-label color="secondary" position="stacked">{{ 'createEventPage.eventNote' | translate}}</ion-label>
-        <ion-textarea type="text" formControlName="code"></ion-textarea>
+        <ion-textarea type="text" formControlName="note"></ion-textarea>
       </ion-item>
         <p class="label-note">{{ 'createEventPage.eventNoteSubtitle' | translate}}</p>
         <p tappable class="link my-5" (click)="openModalSettings()">{{ 'createEventPage.eventAdvanced' | translate}}</p>
