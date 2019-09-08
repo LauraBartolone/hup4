@@ -10,8 +10,8 @@
 <ion-content padding class="bg-primary-gradient">
   <div class="text-white">
     <div class="text-center avatar">
-      <img *ngIf="true" [src]="'assets/imgs/category-cover'+eventCategory+'.jpg'">
-        <ion-fab class="small-fab">
+      <img *ngIf="true" [src]="eventImg">
+        <ion-fab class="small-fab" (click)="openGallery()">
           <ion-fab-button color="secondary">
             <ion-icon name="md-create"></ion-icon>
           </ion-fab-button>
@@ -25,7 +25,7 @@
 
       <ion-item color="transparent" lines="none" no-padding>
           <ion-label color="secondary" position="stacked">{{ 'createEventPage.eventDate' | translate}}</ion-label>
-          <ion-datetime color="secondary" displayFormat="MM/DD/YYYY" formControlName="date"></ion-datetime>
+          <ion-datetime max="2050" min="2019" color="secondary" displayFormat="DD/MM/YYYY" formControlName="date"></ion-datetime>
       </ion-item>
 
       <ion-item color="transparent" lines="none" no-padding>
@@ -34,7 +34,11 @@
       </ion-item>
         <p class="label-note">{{ 'createEventPage.eventNoteSubtitle' | translate}}</p>
         <p tappable class="link my-5" (click)="openModalSettings()">{{ 'createEventPage.eventAdvanced' | translate}}</p>
-      <ion-button type="submit" expand="block" large color="primary" class="mt-4">{{ 'createEventPage.eventCreationBtn' | translate}}</ion-button>
+      <ion-button
+        type="submit" expand="block" large color="primary" class="mt-4"
+      >
+        {{ 'createEventPage.eventCreationBtn' | translate}}
+      </ion-button>
 
     </form>
 

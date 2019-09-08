@@ -21,6 +21,7 @@ import { CoreService } from './services/core.service';
 import { ApiService } from './services/api.service';
 import { UserService } from './services/user.service';
 import { FacebookService } from './services/facebook.service';
+import { Camera } from '@ionic-native/camera/ngx';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -56,6 +57,7 @@ export function createTranslateLoader(http: HttpClient) {
     Facebook,
     FacebookService,
     NativeStorage,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]

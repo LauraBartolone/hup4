@@ -41,5 +41,9 @@
         "eventNoteSubtitle": "* Le note verranno mostrate agli invitati prima dell'inizio dell’evento",
         "eventAdvanced": "Impostazioni avanzate",
         "eventCreationBtn": "CREA EVENTO"
+    },
+    "createEventCategoryPage": {
+      "title": "Che tipo di evento vuoi creare?",
+      "other": "Altro"
     }
 }
