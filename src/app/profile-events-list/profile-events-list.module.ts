@@ -1,4 +1,3 @@
-import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,14 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DashboardPage } from './dashboard.page';
-import { PostImageModule } from '../components/post-image/module';
-import { PleaseLoginModalModule } from '../modal/please-login/please-login.module';
+import { ProfileEventsListPage } from './profile-events-list.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardPage
+    component: ProfileEventsListPage
   }
 ];
 
@@ -24,9 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     TranslateModule,
-    PostImageModule,
-    PleaseLoginModalModule,
   ],
-  declarations: [DashboardPage]
+  declarations: [ProfileEventsListPage]
 })
-export class DashboardPageModule {}
+export class ProfileEventsListPageModule {}

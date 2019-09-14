@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+       <!-- defaultHref="welcome" -->
+    </ion-buttons>
+    <ion-title> {{ 'profile.eventListTitle' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding bg-primary-gradient">
+  <div class="profile-events">
+    <div class="image-bg">
+      <img [src]="'assets/imgs/category-cover1.jpg'">
+      <ion-icon class="go-arrow" name="ios-arrow-forward"
+        (click)="goToDetailEvent()" item-left
+      ></ion-icon>
+
+      <div class="overview">
+        <p><b>laura e nicola</b></p>
+        <p class="small">18/10/2019</p>
+        <p class="small">codice evento per gli invitati: <b>910127</b></p>
+      </div>
+
+      <div class="w-100 image-link-default">
+        <p class="text-link">
+          <span>
+            <ion-icon name="download" item-left></ion-icon>
+          </span>
+          salva foto
+        </p>
+        <p class="text-link">
+          <span>
+            <ion-icon name="trash" item-left></ion-icon>
+          </span>
+          elimina evento
+        </p>
+      </div>
+    </div>
+
+    <div class="image-bg">
+      <img [src]="'assets/imgs/category-cover1.jpg'">
+      <ion-icon class="go-arrow" name="ios-arrow-forward"
+        (click)="goToDetailEvent()" item-left
+      ></ion-icon>
+
+      <div class="overview">
+        <p><b>laura e nicola</b></p>
+        <p class="small">18/10/2019</p>
+        <p class="small">codice evento per gli invitati: <b>910127</b></p>
+      </div>
+
+      <div class="w-100 image-link-default">
+        <p class="text-link">
+          <span>
+            <ion-icon name="download" item-left></ion-icon>
+          </span>
+          salva foto
+        </p>
+        <p class="text-link">
+          <span>
+            <ion-icon name="trash" item-left></ion-icon>
+          </span>
+          elimina evento
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+
+</ion-content>

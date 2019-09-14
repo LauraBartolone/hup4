@@ -22,6 +22,10 @@ export class HomePage {
         title: 'Login',
         linkHref: 'login',
       },
+      {
+        title: 'I miei eventi',
+        linkHref: 'profile-events-list',
+      },
     ];
     this.menu.details.next(sideLinks);
   }

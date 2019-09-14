@@ -7,11 +7,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true" padding class="bg-primary-gradient">
+<ion-content fullscreen="true" class="ion-padding bg-primary-gradient">
   <div class="text-white">
     <h3 class="mb-5">Registrazione</h3>
     <form [formGroup]="registrationForm" (submit)="onSubmit(($event))" class="form-default">
-      <ion-item color="transparent" lines="none" no-padding>
+      <ion-item color="transparent" lines="none" class="ion-no-padding">
         <ion-label color="secondary" position="stacked">Email*</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
@@ -20,7 +20,7 @@
         <p *ngIf="f.email.errors?.email">Email is not valid</p>
       </div>
 
-      <ion-item color="transparent" lines="none" no-padding>
+      <ion-item color="transparent" lines="none" class="ion-no-padding">
         <ion-label color="secondary" position="stacked">Username*</ion-label>
         <ion-input type="text" formControlName="username"></ion-input>
       </ion-item>
@@ -28,7 +28,7 @@
         <p *ngIf="f.username.errors?.required">Username is required</p>
       </div>
 
-      <ion-item color="transparent" lines="none" no-padding>
+      <ion-item color="transparent" lines="none" class="ion-no-padding">
         <ion-label color="secondary" position="stacked">Password*</ion-label>
         <ion-input type="password" formControlName="password1"></ion-input>
       </ion-item>

@@ -1,0 +1,28 @@
+<ion-header no-border>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" color="tertiary">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{ 'createEvent' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding modal-login-content text-center">
+    <h6>{{'auth.pleaseLoginTitle' | translate}}</h6>
+    <p class="small">{{'auth.pleaseLoginDescription' | translate}}</p>
+    <ion-button
+      (click)="goToLogin()"
+      expand="block" large color="primary" class="mt-5"
+    >
+    {{'auth.loginModalOk' | translate}}
+    </ion-button>
+    <ion-button
+      (click)="closeModal()"
+      expand="block" large color="primary" class="mt-3"
+    >
+    {{'auth.notNow' | translate}}
+    </ion-button>
+</ion-content>
+

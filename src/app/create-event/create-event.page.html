@@ -18,17 +18,17 @@
         </ion-fab>
     </div>
     <form [formGroup]="createEventForm" (submit)="onSubmit(($event))" class="form-default">
-      <ion-item color="transparent" lines="none" no-padding>
+      <ion-item color="transparent" lines="none" class="ion-no-padding">
         <ion-label color="secondary" position="stacked">{{ 'createEventPage.eventName' | translate}}</ion-label>
         <ion-input type="text" formControlName="name"></ion-input>
       </ion-item>
 
-      <ion-item color="transparent" lines="none" no-padding>
+      <ion-item color="transparent" lines="none" class="ion-no-padding">
           <ion-label color="secondary" position="stacked">{{ 'createEventPage.eventDate' | translate}}</ion-label>
           <ion-datetime max="2050" [min]="minDate" color="secondary" displayFormat="DD/MM/YYYY" formControlName="date"></ion-datetime>
       </ion-item>
 
-      <ion-item color="transparent" lines="none" no-padding>
+      <ion-item color="transparent" lines="none" class="ion-no-padding">
         <ion-label color="secondary" position="stacked">{{ 'createEventPage.eventNote' | translate}}</ion-label>
         <ion-textarea type="text" formControlName="note"></ion-textarea>
       </ion-item>

@@ -1,4 +1,4 @@
-<ion-content padding class="bg-primary-gradient">
+<ion-content class="ion-padding bg-primary-gradient">
   dashboard
   <div class="cover-img">
     <img [src]="'assets/imgs/category-cover1.jpg'">
@@ -20,6 +20,17 @@
     </ion-row>
   </ion-grid>
 
+<ion-button color="secondary" (click)="openModal()">
+        <ion-icon slot="end" name="create"></ion-icon>
+</ion-button>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="lines"
+      loadingText="">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 
 </ion-content>

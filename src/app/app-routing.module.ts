@@ -11,6 +11,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'registration', loadChildren: './registration/registration.module#RegistrationPageModule' },
   { path: 'pw-recovery', loadChildren: './pw-recovery/pw-recovery.module#PwRecoveryPageModule' },
+  { path: 'profile-events-list', loadChildren: './profile-events-list/profile-events-list.module#ProfileEventsListPageModule' },
+  { path: 'event-detail', loadChildren: './event-detail/event-detail.module#EventDetailPageModule' },
 ];
 
 @NgModule({

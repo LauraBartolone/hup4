@@ -22,7 +22,18 @@
         "orLogin": "Oppure accedi tramite:",
         "forgetPw": "Non ricordi la tua password?",
         "recoveryIt": "Recuperala"
-      }
+      },
+      "pleaseLoginTitle": "Per favore accedi o registrati!",
+      "pleaseLoginDescription": "Alcune funzionalità non sono disponibili se non sei loggato.",
+      "loginModalOk": "Ok, accedo subito!",
+      "notNow": "Non ora"
+    },
+    "profile": {
+      "eventListTitle": "I miei eventi",
+      "eventDetailTitle": "Dettaglio Evento",
+      "eventCode": "Codice evento: ",
+      "eventCodeDescription": "Condividi il codice con i tuoi invitati! Invitali a scaricare la nostra APP!",
+      "eventCodeDescription2": "Usa i nostri pulsanti oppure invialo tramite il canale che preferisci."
     },
     "category": {
         "wedding": "Wedding",

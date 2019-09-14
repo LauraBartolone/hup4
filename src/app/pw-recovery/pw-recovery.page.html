@@ -14,7 +14,7 @@
     <p class="mb-5 mt-3">Inserisci la tua email, ti manderemo una email per il recupero
     </p>
     <form [formGroup]="recoveryForm" (submit)="onSubmit(($event))" class="form-default">
-      <ion-item color="transparent" lines="none" no-padding>
+      <ion-item color="transparent" lines="none" class="ion-no-padding">
         <ion-label color="secondary" position="stacked">Email</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>

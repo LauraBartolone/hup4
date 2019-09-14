@@ -7,11 +7,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="bg-primary-gradient" fullscreen="true">
+<ion-content class="ion-padding bg-primary-gradient" fullscreen="true">
   <div class="text-white">
     <h3 class="mb-4">{{'auth.login.loginTitle' | translate}}</h3>
     <form [formGroup]="loginForm" (submit)="onSubmit(($event))" class="form-default">
-      <ion-item color="transparent" lines="none" no-padding>
+      <ion-item color="transparent" lines="none" class="ion-no-padding">
         <ion-label color="secondary" position="stacked">{{'auth.username' | translate}}</ion-label>
         <ion-input type="text" formControlName="username"></ion-input>
       </ion-item>
@@ -19,7 +19,7 @@
         <p *ngIf="f.username.errors?.required">{{'error.required' | translate}}</p>
       </div>
 
-      <ion-item color="transparent" lines="none" no-padding>
+      <ion-item color="transparent" lines="none" class="ion-no-padding">
         <ion-label color="secondary" position="stacked">{{'auth.password' | translate}}</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
