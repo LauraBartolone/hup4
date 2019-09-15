@@ -1,5 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
+import { EventService } from '../services/event.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-profile-events-list',
@@ -8,12 +11,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileEventsListPage implements OnInit {
 
-  constructor(private router: Router) { }
+  public events = [];
 
-  ngOnInit() {
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private eventService: EventService,
+    private apiService: ApiService) {
+    }
+
+    async ngOnInit() {
+      (await this.eventService.getEventList()).subscribe(respData => {
+        if (!this.apiService.hasErrors(respData)) {
+          this.events = respData.response;
+      } else {
+        // TODO: #ERROR
+      }
+      });
+      // this.api
   }
 
-  public goToDetailEvent() {
-    this.router.navigate(['/event-detail']);
+  public goToDetailEvent(eventId) {
+    this.router.navigate(['/event-detail', eventId]);
   }
 }

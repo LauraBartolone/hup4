@@ -10,16 +10,16 @@
 
 <ion-content class="ion-padding bg-primary-gradient">
   <div class="profile-events">
-    <div class="image-bg">
-      <img [src]="'assets/imgs/category-cover1.jpg'">
+    <div class="image-bg" *ngFor="let event of events">
+      <img [src]="'assets/imgs/category-cover'+ event.category +'.jpg'">
       <ion-icon class="go-arrow" name="ios-arrow-forward"
-        (click)="goToDetailEvent()" item-left
+        (click)="goToDetailEvent(event.id)" item-left
       ></ion-icon>
 
       <div class="overview">
-        <p><b>laura e nicola</b></p>
-        <p class="small">18/10/2019</p>
-        <p class="small">codice evento per gli invitati: <b>910127</b></p>
+        <p><b>{{event.name}}</b></p>
+        <p class="small">{{event.date}}</p>
+        <p class="small">codice evento per gli invitati: <b>{{event.code}}</b></p>
       </div>
 
       <div class="w-100 image-link-default">
@@ -38,33 +38,6 @@
       </div>
     </div>
 
-    <div class="image-bg">
-      <img [src]="'assets/imgs/category-cover1.jpg'">
-      <ion-icon class="go-arrow" name="ios-arrow-forward"
-        (click)="goToDetailEvent()" item-left
-      ></ion-icon>
-
-      <div class="overview">
-        <p><b>laura e nicola</b></p>
-        <p class="small">18/10/2019</p>
-        <p class="small">codice evento per gli invitati: <b>910127</b></p>
-      </div>
-
-      <div class="w-100 image-link-default">
-        <p class="text-link">
-          <span>
-            <ion-icon name="download" item-left></ion-icon>
-          </span>
-          salva foto
-        </p>
-        <p class="text-link">
-          <span>
-            <ion-icon name="trash" item-left></ion-icon>
-          </span>
-          elimina evento
-        </p>
-      </div>
-    </div>
   </div>
 
 

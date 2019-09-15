@@ -22,6 +22,8 @@ import { ApiService } from './services/api.service';
 import { UserService } from './services/user.service';
 import { FacebookService } from './services/facebook.service';
 import { Camera } from '@ionic-native/camera/ngx';
+import { StorageService } from './services/storage.service';
+import { EventService } from './services/event.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -51,7 +53,9 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     MenuService,
+    StorageService,
     ApiService,
+    EventService,
     UserService,
     CoreService,
     Facebook,

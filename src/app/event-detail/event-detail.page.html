@@ -20,7 +20,7 @@
  <p class="text-white m-0 text-left">{{ 'profile.eventCode' | translate}}</p>
 
   <ion-item class="input-code mt-2">
-    <ion-input type="text" disabled value="CAGD02"></ion-input>
+    <ion-input type="text" disabled [value]="event?.code"></ion-input>
   </ion-item>
 
   <p class="text-18 text-white mt-5 pt-5">{{ 'profile.eventCodeDescription' | translate}}</p>

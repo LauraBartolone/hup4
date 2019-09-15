@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { LanguageService } from 'src/themes/ionic/services/language.service';
 import { CoreService } from './services/core.service';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { StorageService, StorageType } from './services/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private languageService: LanguageService,
     public core: CoreService,
+    public storage: StorageService,
+    private nativeStorage: NativeStorage,
   ) {
     this.initializeApp();
   }
@@ -27,6 +31,14 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.languageService.setInitialAppLanguage();
+      if (this.platform.is('cordova')) {
+        this.storage.setNative(this.nativeStorage);
+        this.storage.init(StorageType.native);
+        console.log('sono in mobile!!');
+      } else {
+        this.storage.init(StorageType.local);
+        console.log('sono nel browser!!');
+      }
     });
   }
 }

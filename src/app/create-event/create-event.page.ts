@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { EventSettingsModalPage } from '../modal/event-settings-modal/settings-modal.page';
 import * as moment from 'moment';
 import { ApiService } from '../services/api.service';
+import { Utils } from '../services/utils';
 
 @Component({
   selector: 'app-create-event',
@@ -42,9 +43,19 @@ export class CreateEventPage implements OnInit {
   }
 
   ngOnInit() {
+    this.route.queryParams
+      .subscribe(params => {
+        if (Utils.isNonEmptyObject(params)) {
+          this.createEventForm.controls.name.setValue(params.name);
+          this.createEventForm.controls.date.setValue(params.date);
+          this.createEventForm.controls.note.setValue(params.note);
+        }
+        console.log(params); // {order: "popular"}
+      });
   }
 
   public onSubmit(ev: any): void {
+    console.log(this.createEventForm.value.date);
     this.requestData = {
       date: this.momentjs(new Date(this.createEventForm.value.date)).format('YYYY-MM-DD'),
       note: this.createEventForm.value.note,

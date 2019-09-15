@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { Facebook } from '@ionic-native/facebook/ngx';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { LoadingController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ApiService } from './api.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class FacebookService {
 
   constructor(
     private fb: Facebook,
-    private nativeStorage: NativeStorage,
+    private storage: StorageService,
     public loadingController: LoadingController,
     public apiService: ApiService,
     private router: Router,
@@ -56,20 +56,15 @@ export class FacebookService {
         .then(user => {
           user.picture = 'https://graph.facebook.com/' + userId + '/picture?type=large';
           // now we have the users info, let's save it in the NativeStorage
-          this.nativeStorage.setItem('facebook_user',
+          this.storage.set('facebook_user',
           {
             token: respData.key,
             name: user.name,
             email: user.email,
             picture: user.picture
-          })
-          .then(() => {
-            // this.router.navigate(['/user']);
-            loading.dismiss();
-          }, error => {
-            console.log(error);
-            loading.dismiss();
           });
+          // this.router.navigate(['/user']);
+          loading.dismiss();
         });
       });
 
