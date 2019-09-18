@@ -66,6 +66,24 @@ export class ApiService {
     });
   }
 
+  public put(url: string, httpOptions, postData?): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this.http.put(this.apiUrl + url, postData, httpOptions)
+        .subscribe(data => {
+          // tslint:disable-next-line:no-string-literal
+          observer.next(
+            this.buildResponse(200, data)
+          );
+          observer.complete();
+         }, error => {
+          observer.next(
+            this.buildResponse(error.status, undefined, error.error)
+          );
+          observer.complete();
+        });
+    });
+  }
+
   private appendAuthorization(headers, token) {
     // tslint:disable-next-line:object-literal-key-quotes
     headers = headers.append('Authorization', 'Token ' + token);

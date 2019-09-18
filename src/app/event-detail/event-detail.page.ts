@@ -41,6 +41,7 @@ export class EventDetailPage implements OnInit {
          note: this.event.note,
          date: this.event.date,
          category: this.event.category
+         // TODO: add image
       }
     });
   }

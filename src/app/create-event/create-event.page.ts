@@ -7,6 +7,7 @@ import { EventSettingsModalPage } from '../modal/event-settings-modal/settings-m
 import * as moment from 'moment';
 import { ApiService } from '../services/api.service';
 import { Utils } from '../services/utils';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-create-event',
@@ -20,6 +21,9 @@ export class CreateEventPage implements OnInit {
   public eventImg: string;
   public minDate = this.momentjs(new Date()).format('YYYY-MM-DD');
 
+  private isEditEvent = false;
+  private eventId;
+
   public requestData;
 
   constructor(
@@ -28,6 +32,7 @@ export class CreateEventPage implements OnInit {
     private route: ActivatedRoute,
     public modalController: ModalController,
     public apiService: ApiService,
+    public userService: UserService,
     ) {
     console.log(this.minDate);
     this.createEventForm = this.formBuilder.group({
@@ -46,16 +51,17 @@ export class CreateEventPage implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         if (Utils.isNonEmptyObject(params)) {
+          this.isEditEvent = true;
           this.createEventForm.controls.name.setValue(params.name);
           this.createEventForm.controls.date.setValue(params.date);
           this.createEventForm.controls.note.setValue(params.note);
+          this.eventId = params.id;
+          // TODO add image : this.eventImg = params.image;
         }
-        console.log(params); // {order: "popular"}
       });
   }
 
-  public onSubmit(ev: any): void {
-    console.log(this.createEventForm.value.date);
+  public async onSubmit(ev: any) {
     this.requestData = {
       date: this.momentjs(new Date(this.createEventForm.value.date)).format('YYYY-MM-DD'),
       note: this.createEventForm.value.note,
@@ -63,14 +69,31 @@ export class CreateEventPage implements OnInit {
       name: this.createEventForm.value.name
     };
 
-    this.apiService.post('events/',
-      this.apiService.buildHeaders(),
+    const token = await this.userService.getToken();
+
+    if (this.isEditEvent) {
+      this.editEvent(token);
+    } else {
+      this.createEvent(token);
+    }
+  }
+
+  private editEvent(token) {
+    this.apiService.put('events/' + this.eventId + '/',
+      this.apiService.buildHeaders(token),
       this.requestData
     ).subscribe((resp) => {
-
       console.log(resp);
     });
+  }
 
+  private createEvent(token) {
+    this.apiService.post('events/',
+      this.apiService.buildHeaders(token),
+      this.requestData
+    ).subscribe((resp) => {
+      console.log(resp);
+    });
   }
 
   public async openModalSettings() {
@@ -78,8 +101,6 @@ export class CreateEventPage implements OnInit {
       component: EventSettingsModalPage
     });
     return await modal.present();
-    // const modal: Modal = this.modalController.create(EventSettingsModal);
-    //   modal.present();
   }
 
   public openGallery() {

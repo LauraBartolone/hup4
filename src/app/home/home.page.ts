@@ -19,10 +19,6 @@ export class HomePage {
         linkHref: 'create-event-category',
       },
       {
-        title: 'Login',
-        linkHref: 'login',
-      },
-      {
         title: 'I miei eventi',
         linkHref: 'profile-events-list',
       },

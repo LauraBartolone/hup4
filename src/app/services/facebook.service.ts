@@ -56,7 +56,7 @@ export class FacebookService {
         .then(user => {
           user.picture = 'https://graph.facebook.com/' + userId + '/picture?type=large';
           // now we have the users info, let's save it in the NativeStorage
-          this.storage.set('facebook_user',
+          this.storage.set('user',
           {
             token: respData.key,
             name: user.name,

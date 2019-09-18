@@ -37,7 +37,7 @@
       <ion-button
         type="submit" expand="block" large color="primary" class="mt-4"
       >
-        {{ 'createEventPage.eventCreationBtn' | translate}}
+        {{ (isEditEvent ? 'save' : 'createEventPage.eventCreationBtn') | translate}}
       </ion-button>
 
     </form>
