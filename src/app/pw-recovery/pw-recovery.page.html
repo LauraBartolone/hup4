@@ -4,14 +4,13 @@
       <ion-back-button text=""></ion-back-button>
        <!-- defaultHref="welcome" -->
     </ion-buttons>
-    <ion-title> {{ 'createEvent' | translate }}</ion-title>
+    <ion-title> Recupera password</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="bg-primary-gradient">
   <div class="text-white">
-    <h3 class="mt-5">Recupera password</h3>
-    <p class="mb-5 mt-3">Inserisci la tua email, ti manderemo una email per il recupero
+    <p class="mb-5 mt-5">Inserisci la tua email, ti manderemo una email per il recupero
     </p>
     <form [formGroup]="recoveryForm" (submit)="onSubmit(($event))" class="form-default">
       <ion-item color="transparent" lines="none" class="ion-no-padding">

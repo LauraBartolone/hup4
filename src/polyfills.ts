@@ -60,6 +60,9 @@ import './zone-flags.ts';
 
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
+// import 'zone.js/dist/zone.js';
+// (window as any).__Zone_disable_toString = true;
+
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

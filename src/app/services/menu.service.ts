@@ -12,7 +12,6 @@ export class MenuService {
   constructor(public menu: MenuController) { }
 
   public toggle() {
-    console.log('togglo');
     this.menu.toggle('slidingMenu');
   }
 }

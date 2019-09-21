@@ -32,7 +32,11 @@ export class SideMenuComponent implements OnInit {
   public navToPage(link: MenuLink) {
     console.log('Navigating to: ', link.linkHref);
     this.menu.toggle();
-    this.navController.navigateForward(link.linkHref);
+    try {
+      this.navController.navigateForward(link.linkHref);
+    } catch (e) {
+      console.log(e);
+    }
     // this.core.navToPage(link.linkHref);
   }
 
