@@ -26,7 +26,7 @@ export class ApiService {
     const httpOptions = {
       headers
     };
-    console.log('httpOp', httpOptions);
+    console.log('httpOp', token);
     return httpOptions;
   }
 
@@ -86,7 +86,7 @@ export class ApiService {
 
   private appendAuthorization(headers, token) {
     // tslint:disable-next-line:object-literal-key-quotes
-    headers = headers.append('Authorization', 'Token ' + token);
+    headers = headers.append('Authorization', 'JWT ' + token);
     return headers;
   }
 

@@ -58,8 +58,8 @@ export class FacebookService {
           // now we have the users info, let's save it in the NativeStorage
           this.storage.set('user',
           {
-            token: respData.key,
-            name: user.name,
+            token: respData.response.token,
+            username: user.name,
             email: user.email,
             picture: user.picture
           });

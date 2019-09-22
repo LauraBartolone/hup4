@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { FacebookService } from './facebook.service';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { LoadingController, AlertController, Platform } from '@ionic/angular';
 import { StorageService } from './storage.service';
 import { Utils } from './utils';
-import { resolve } from 'path';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -24,14 +23,14 @@ export class UserService {
     private loadingController: LoadingController,
     private platform: Platform,
     public alertController: AlertController) {
-      this.platform.ready().then(() => {
-        this.storage.get('user').then((response) => {
-          if (response) {
-            this.isAuthenticate.next(true);
-          }
-        });
-      });
     }
+
+  public isTokenExpired(token) {
+    const helper = new JwtHelperService();
+    console.log('expired:', token, helper.isTokenExpired(token));
+    console.log('decoded', helper.decodeToken(token));
+    return helper.isTokenExpired(token);
+  }
 
   public registration(data) {
     this.apiService.post('rest-auth/registration/',
@@ -41,7 +40,7 @@ export class UserService {
       if (!this.apiService.hasErrors(respData)) {
         this.storage.set('user',
         {
-          token: respData.response.key,
+          token: respData.response.token,
           username: data.username,
         });
       } else {
@@ -63,7 +62,7 @@ export class UserService {
       if (!this.apiService.hasErrors(respData)) {
         this.storage.set('user',
         {
-          token: respData.response.key,
+          token: respData.response.token,
           username: data.username,
         });
 
@@ -100,12 +99,31 @@ export class UserService {
     });
   }
 
-  public isLoggeedIn() {
+  public async checkIfIsLoggedIn() {
+    return await this.storage.get('user').then((response) => {
+      const jsonObject = JSON.parse(response);
+      if (Utils.isDefined(jsonObject.token) && !this.isTokenExpired(jsonObject.token)) {
+        console.log('next true');
+        this.isAuthenticate.next(true);
+        return true;
+      } else {
+        this.isAuthenticate.next(false);
+        return false;
+      }
+    }).catch(err => {
+        console.log('catch', err);
+        this.isAuthenticate.next(false);
+        return false;
+      } );
+  }
+
+  public isLoggeedIn(): boolean {
     return this.isAuthenticate.value;
   }
 
   public async getToken() {
      return await this.storage.get('user').then((data) => {
+      data = JSON.parse(data);
       if (Utils.isDefined(data.token)) {
       return data.token;
       }

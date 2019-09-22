@@ -9,30 +9,43 @@ export class AuthGuard implements CanLoad, CanActivate {
       public userService: UserService,
       private router: Router) {}
 
-    public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+      const isLogged: boolean = await this.userService.checkIfIsLoggedIn();
 
-      if (!this.userService.isLoggeedIn()) {
-        this.router.navigate(['/login']);
-        console.log('NONpuoi andarci');
+      console.log('isLogged', isLogged);
+      return new Promise((resolve, reject) => {
+        if (isLogged) {
+          resolve(true);
+        } else {
+          this.router.navigate(['/login']);
+          resolve(false);
+        }
+      });
 
-        return false;
-      } else {
-        console.log('puoi andarci');
-        return true;
-      }
+      // if (!this.userService.isLoggeedIn()) {
+      //   this.router.navigate(['/login']);
+      //   console.log('NONpuoi andarci');
+
+      //   return false;
+      // } else {
+      //   console.log('puoi andarci');
+      //   return true;
+      // }
     }
 
-    public canLoad(route: Route): boolean {
+    public async canLoad(route: Route): Promise<boolean> {
 
-      if (!this.userService.isLoggeedIn()) {
-        this.router.navigate(['/login']);
-        console.log('NONpuoi andarci');
+      const isLogged: boolean = await this.userService.checkIfIsLoggedIn();
+      console.log('isLogged', isLogged);
 
-        return false;
-      } else {
-        console.log('puoi andarci');
-        return true;
-      }
+      return new Promise((resolve, reject) => {
+        if (isLogged) {
+          resolve(true);
+        } else {
+          this.router.navigate(['/login']);
+          resolve(false);
+        }
+      });
 
     }
 
