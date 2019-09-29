@@ -6,10 +6,13 @@
     "guestJoin": "Partecipa da invitato",
     "home": {
         "eventCodeTitle": "Inserisci il codice evento",
-        "note": "Note dei festeggiati"
+        "note": "Note dei festeggiati",
+        "goBtn": "VAI!"
+
     },
     "error": {
-      "required": "campo obbligatorio"
+      "required": "campo obbligatorio",
+      "invalidCode": "Ops controlla che il codice inserito sia corretto."
     },
     "auth": {
       "username": "Username",

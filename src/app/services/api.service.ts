@@ -3,7 +3,6 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Utils } from './utils';
 import { Observable, Observer } from 'rxjs';
-import { utils } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +25,13 @@ export class ApiService {
     const httpOptions = {
       headers
     };
-    console.log('httpOp', token);
     return httpOptions;
   }
 
-  public get(url: string, httpOptions): Observable<any> {
+  public get(url: string, httpOptions, queryObj?): Observable<any> {
+    if (Utils.isDefined(queryObj)) {
+      url = url + '?' + this.buildQueryString(queryObj);
+    }
     return new Observable((observer: Observer<any>) => {
       this.http.get(this.apiUrl + url, httpOptions)
         .subscribe(data => {
@@ -109,6 +110,13 @@ export class ApiService {
       return false;
     }
     return true;
+  }
+
+  public buildQueryString(queryObj) {
+    console.log(queryObj);
+    return Object.keys(queryObj).map(key => {
+      return key + '=' + queryObj[key];
+    }).join('&');
   }
 
 

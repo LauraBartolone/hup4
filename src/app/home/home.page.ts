@@ -3,6 +3,7 @@ import { MenuService } from '../services/menu.service';
 import { MenuLink } from '../components/side-menu/side-menu.component';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +12,14 @@ import { NavController } from '@ionic/angular';
 })
 export class HomePage {
   public homeForm: FormGroup;
+  public submitted = false;
+  public errorCode = '';
 
   constructor(
     private menu: MenuService,
     private formBuilder: FormBuilder,
     private navController: NavController,
+    private apiService: ApiService,
     ) {
     this.homeForm = this.formBuilder.group({
       code: ['', Validators.required]
@@ -25,9 +29,24 @@ export class HomePage {
   get f() { return this.homeForm.controls; }
 
   public onSubmit(ev: any): void {
+    this.submitted = true;
     if (this.homeForm.valid) {
-      this.navController.navigateRoot(['/dashboard', this.homeForm.value.code]);
+      this.apiService.get(
+        'event/' + this.homeForm.value.code + '/',
+        this.apiService.buildHeaders(),
+      ).subscribe(respData => {
+        if (respData.code === 200) {
+          this.navController.navigateRoot(['/dashboard', this.homeForm.value.code]);
+        } else {
+          console.log(respData);
+          this.errorCode = 'codice errato';
+        }
+      });
     }
+  }
+
+  public changeInput() {
+    this.errorCode = '';
   }
 
   ionViewWillEnter() {

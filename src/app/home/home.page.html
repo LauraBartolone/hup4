@@ -5,11 +5,15 @@
 
   <form [formGroup]="homeForm" (submit)="onSubmit(($event))">
     <ion-item class="input-code mt-2">
-      <ion-input type="text" placeholder="CAGD02"
+      <ion-input type="text" placeholder="CAGD02" (input)='changeInput()'
       formControlName="code"
       ></ion-input>
     </ion-item>
-    <ion-button type="submit" center large color="primary" class="my-4">VAI!</ion-button>
+    <div *ngIf="submitted" class="form-error mt-2">
+      <p *ngIf="f.code.errors && f.code.errors?.required">{{'error.required' | translate}}</p>
+      <p *ngIf="errorCode !== ''">{{'error.invalidCode' | translate}}</p>
+    </div>
+    <ion-button type="submit" center large color="primary" class="my-4">{{ 'home.goBtn' | translate}}</ion-button>
   </form>
 
   <p class="text-20 text-white mt-5">{{ 'home.note' | translate}}</p>

@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { PleaseLoginModal } from '../modal/please-login/please-login';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api.service';
+import { Utils } from '../services/utils';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,25 +12,54 @@ import { PleaseLoginModal } from '../modal/please-login/please-login';
 })
 export class DashboardPage implements OnInit {
 
+  private nextPage = 1;
+  private eventCode: string;
+  public queryParam = {
+    event: '',
+    page: 1
+  };
+
   @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
 
-  public pictures: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  public pictures: any[] = [];
 
-  constructor(private modalController: ModalController) { }
+  constructor(
+    private modalController: ModalController,
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+  ) {
+    this.route.params.subscribe(params => {
+      // tslint:disable-next-line:radix
+      this.eventCode = params.code;
+      this.getPictures();
+    });
+  }
+
+  private getPictures(page = 1, event?) {
+    this.queryParam.event = this.eventCode;
+    this.queryParam.page = page;
+
+    this.apiService.get(
+      'photoes/',
+      this.apiService.buildHeaders(),
+      this.queryParam
+    ).subscribe(respData => {
+      if (!this.apiService.hasErrors(respData)) {
+        this.pictures.push(...respData.response.results);
+        this.nextPage = respData.response.next;
+        if (Utils.isDefined(event)) {
+          event.target.complete();
+          if (this.pictures.length === respData.response.count ) {
+            event.target.disabled = true;
+          }
+        }
+      }
+    });
+  }
 
   public loadData(event) {
-    setTimeout(() => {
-      console.log('Done');
-      event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      // if (data.length == 1000) {
-      //   event.target.disabled = true;
-      // }
-      const newEl = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-      this.pictures.push(...newEl);
-    }, 6777700);
+    console.log('load');
+    this.getPictures(this.nextPage, event);
   }
 
   ngOnInit() {
