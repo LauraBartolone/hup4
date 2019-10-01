@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { PleaseLoginModal } from '../modal/please-login/please-login';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { Utils } from '../services/utils';
 
@@ -27,6 +27,7 @@ export class DashboardPage implements OnInit {
     private modalController: ModalController,
     private route: ActivatedRoute,
     private apiService: ApiService,
+    private router: Router,
   ) {
     this.route.params.subscribe(params => {
       // tslint:disable-next-line:radix
@@ -55,6 +56,10 @@ export class DashboardPage implements OnInit {
         }
       }
     });
+  }
+
+  public goToWishList() {
+    this.router.navigate(['/wish-list', this.eventCode]);
   }
 
   public loadData(event) {

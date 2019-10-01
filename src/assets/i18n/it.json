@@ -4,6 +4,11 @@
     "menuCreateEvent": "Crea evento",
     "save": "salva",
     "guestJoin": "Partecipa da invitato",
+    "whishList": {
+      "title": "Bacheca auguri",
+      "publicBtn": "PUBBLICA",
+      "placeholder": "Fai il tuo augurio!"
+    },
     "home": {
         "eventCodeTitle": "Inserisci il codice evento",
         "note": "Note dei festeggiati",

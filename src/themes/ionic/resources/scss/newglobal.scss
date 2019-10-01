@@ -54,6 +54,7 @@ ion-content.bg-primary-gradient {
   --background: linear-gradient(180deg, #D94F67 0%, #F78F78 100%);
 }
 
+
 ion-content.bg-welcome {
   --background: #f7f7f7;
 }
@@ -65,23 +66,59 @@ button[disabled] {
   color: #fff;
 }
 
+  @mixin avatar($dimension) {
+    img {
+      width: $dimension;
+      height: $dimension;
+      display: block;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      object-fit: cover;
+    }
+  }
 
-.avatar {
-  padding: 25px 0;
-  img {
-    width: 102px;
-    height: 102px;
-    display: block;
-    margin: 0 auto;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-    object-fit: cover;
+  .avatar {
+    @include avatar(102px);
+    padding: 25px 0;
+
+    .img {
+      margin: 0 auto;
+    }
+
+    .small-fab {
+      position: absolute;
+      top: 73px;
+      margin-left: 80px;
+    }
   }
-  .small-fab {
-    position: absolute;
-    top: 73px;
-    margin-left: 80px;
+
+  .avatar-small {
+    position: relative;
+    @include avatar(40px);
+    margin: 20px;
+    background: #ffffff;
+    border-radius: 4px;
+    img {
+      position: absolute;
+      top: -12px;
+      margin-right: auto;
+      margin-left: 12px;
+    }
+    .avatar-name {
+      position: absolute;
+      top: 4px;
+      margin-left: 58px;
+    }
   }
-}
+
+  .wish-panel {
+    &.active {
+      min-height: 153px;
+      textarea {
+        min-height: 120px;
+      }
+    }
+    font-size: 14px;
+  }
 
 }

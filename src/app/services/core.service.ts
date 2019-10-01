@@ -39,25 +39,10 @@ constructor(private router: Router, private platform: Platform) {
   }
 
   private showHideTabs(e: any) {
-    // Result:  e.url: "/tabs/groups/new-group?type=group"
-    // Split the URL up into an array.
     const urlArray = e.url.split('/');
-    // Result: urlArray: ["", "tabs", "groups", "new-group?type=group"]
-    // Grab the parentUrl
-    // const pageUrlParent = urlArray[urlArray.length - 2];
-    // Grab the last page url.
-    const pageUrl = urlArray[urlArray.length - 1];
-    // Result: new-group?type=group
+    const pageUrl = urlArray[1];
     const page = pageUrl.split('?')[0];
-    // Result: new-group
-    // Check if it's a routeParamPage that we need to hide on
-    // const hideParamPage = this.routeParamPages.indexOf(pageUrlParent) > -1 && !isNaN(Number(page));
-    // Check if we should hide or show tabs.
-    // const shouldHide = this.hideTabBarPages.indexOf(page) > -1 || hideParamPage;
     const shouldShowSideMenu = this.showSideMenuPages.indexOf(page) > -1;
-    console.log(shouldShowSideMenu);
-    // Result: true
-    // Not ideal to set the timeout, but I haven't figured out a better method to wait until the page is in transition...
     try {
       setTimeout(() => {
         // shouldHide ? this.hideTabs() : this.showTabs();
