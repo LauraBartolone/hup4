@@ -103,6 +103,10 @@
     object-fit: cover;
     top: 0;
     left: 0;
+    &>img {
+      height: inherit;
+      width: 100%;
+    }
     &+p, &+* {
       margin-top: 25vh;
     }

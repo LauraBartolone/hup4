@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 import { DashboardPage } from './dashboard.page';
 import { PostImageModule } from '../components/post-image/module';
 import { PleaseLoginModalModule } from '../modal/please-login/please-login.module';
+import { PhotoDetailModalModule } from '../modal/photo-detail/photo-detail.module';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     TranslateModule,
     PostImageModule,
     PleaseLoginModalModule,
+    PhotoDetailModalModule,
   ],
   declarations: [DashboardPage]
 })

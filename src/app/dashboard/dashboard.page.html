@@ -1,4 +1,4 @@
-<ion-content class="ion-padding bg-primary-gradient">
+<ion-content class="bg-primary-gradient">
   dashboard
   <div class="cover-img">
     <img [src]="'assets/imgs/category-cover1.jpg'">
@@ -13,16 +13,16 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size="4" size-md="3" *ngFor="let photo of pictures">
-        <post-image imgSrc="assets/imgs/home.svg">
+      <ion-col size="4" size-md="3" *ngFor="let photo of pictures; let i = index">
+        <post-image [imgSrc]="photo.image" (click)="openDetailPhotoModal(i)">
         </post-image>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-<ion-button color="secondary" (click)="openModal()">
+<!--<ion-button color="secondary" (click)="openModal()">
         <ion-icon slot="end" name="create"></ion-icon>
-</ion-button>
+</ion-button>-->
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)"
   >

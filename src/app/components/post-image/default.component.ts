@@ -3,7 +3,8 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'post-image',
-  templateUrl: './default.html'
+  templateUrl: './default.html',
+  styleUrls: ['./style.scss'],
 })
 export class PostImageComponent {
   @Input() imgSrc = '../assets/img/home.svg';

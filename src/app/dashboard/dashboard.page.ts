@@ -4,6 +4,7 @@ import { PleaseLoginModal } from '../modal/please-login/please-login';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { Utils } from '../services/utils';
+import { PhotoDetailModal } from '../modal/photo-detail/photo-detail';
 
 @Component({
   selector: 'app-dashboard',
@@ -46,6 +47,9 @@ export class DashboardPage implements OnInit {
       this.queryParam
     ).subscribe(respData => {
       if (!this.apiService.hasErrors(respData)) {
+        if (page === 1) {
+          this.pictures = [];
+        }
         this.pictures.push(...respData.response.results);
         this.nextPage = respData.response.next;
         if (Utils.isDefined(event)) {
@@ -63,19 +67,26 @@ export class DashboardPage implements OnInit {
   }
 
   public loadData(event) {
-    console.log('load');
     this.getPictures(this.nextPage, event);
   }
 
   ngOnInit() {
   }
 
-  private async openModal() {
+  public async openDetailPhotoModal(index) {
     const myModal = await this.modalController.create({
-      component: PleaseLoginModal,
-      cssClass: 'small-modal'
+      component: PhotoDetailModal,
+      componentProps: { currentIndex: index, pictures: this.pictures, nextPage: this.nextPage },
     });
     return await myModal.present();
   }
+
+  // private async openModal() {
+  //   const myModal = await this.modalController.create({
+  //     component: PleaseLoginModal,
+  //     cssClass: 'small-modal'
+  //   });
+  //   return await myModal.present();
+  // }
 
 }

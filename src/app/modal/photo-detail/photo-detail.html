@@ -1,0 +1,25 @@
+<ion-header no-border>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" color="secondary">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="photo-content text-center">
+    <ion-spinner *ngIf="!show" color="secondary" name="dots"
+      class="h-100 m-auto"
+    ></ion-spinner>
+    <ion-slides pager="true" class="slider-custom" [options]="slideOpts" (ionSlidesDidLoad)="init()">
+      <ion-slide *ngFor="let photo of pictures" class="h-auto">
+        <div class="h-100 center-image" *ngIf="show">
+          <img [src]="photo.image">
+        </div>
+      </ion-slide>
+    </ion-slides>
+
+
+</ion-content>
+

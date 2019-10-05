@@ -1,0 +1,14 @@
+.photo-content {
+  min-height: 342px;
+  .center-image {
+    display: flex;
+    align-items: center;
+  }
+}
+ion-content.photo-content {
+  --background: var(--ion-color-dark);
+
+  .slider-custom {
+    height: calc(100% - 44px);
+  }
+}
