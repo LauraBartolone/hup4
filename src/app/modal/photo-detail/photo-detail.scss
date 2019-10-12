@@ -3,6 +3,9 @@
   .center-image {
     display: flex;
     align-items: center;
+    img {
+      margin: auto;
+    }
   }
 }
 ion-content.photo-content {

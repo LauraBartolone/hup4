@@ -21,14 +21,12 @@ export class UserService {
     private fbService: FacebookService,
     private storage: StorageService,
     private loadingController: LoadingController,
-    private platform: Platform,
     public alertController: AlertController) {
     }
 
   public isTokenExpired(token) {
     const helper = new JwtHelperService();
-    console.log('expired:', token, helper.isTokenExpired(token));
-    console.log('decoded', helper.decodeToken(token));
+    // console.log('decoded', helper.decodeToken(token));
     return helper.isTokenExpired(token);
   }
 
@@ -103,7 +101,6 @@ export class UserService {
     return await this.storage.get('user').then((response) => {
       const jsonObject = JSON.parse(response);
       if (Utils.isDefined(jsonObject.token) && !this.isTokenExpired(jsonObject.token)) {
-        console.log('next true');
         this.isAuthenticate.next(true);
         return true;
       } else {
@@ -111,7 +108,6 @@ export class UserService {
         return false;
       }
     }).catch(err => {
-        console.log('catch', err);
         this.isAuthenticate.next(false);
         return false;
       } );
@@ -128,6 +124,15 @@ export class UserService {
       return data.token;
       }
     });
+  }
+
+  public async getUser() {
+    return await this.storage.get('user').then((data) => {
+     data = JSON.parse(data);
+     if (Utils.isDefined(data)) {
+     return data;
+     }
+   });
   }
 
   public async presentLoading(loading) {

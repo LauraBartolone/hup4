@@ -4,6 +4,11 @@
     --detail-icon-color: var(--ion-color-primary);
     --detail-icon-opacity: 1;
   }
+  .avatar {
+    img {
+      margin: auto;
+    }
+  }
 }
 
 ion-menu {

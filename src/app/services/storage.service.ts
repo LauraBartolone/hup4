@@ -52,8 +52,6 @@ export class StorageService {
       if (Utils.isDefined(this.localStorage)) {
         const value: string = this.localStorage.getItem(key);
         if (Utils.isDefined(value)) {
-          // const a = JSON.parse(value);
-          // console.log(a);
           resolve(value);
           return;
         }

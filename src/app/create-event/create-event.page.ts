@@ -34,7 +34,6 @@ export class CreateEventPage implements OnInit {
     public apiService: ApiService,
     public userService: UserService,
     ) {
-    console.log(this.minDate);
     this.createEventForm = this.formBuilder.group({
       name: ['', Validators.required],
       note: ['', Validators.required],

@@ -1,23 +1,25 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router, RouterStateSnapshot, CanLoad, Route } from '@angular/router';
 import { UserService } from './user.service';
+import { ModalController } from '@ionic/angular';
+import { PleaseLoginModal } from '../modal/please-login/please-login';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanLoad, CanActivate {
     constructor(
       public userService: UserService,
-      private router: Router) {}
+      private router: Router,
+      private modalController: ModalController,
+      ) {}
 
     public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
       const isLogged: boolean = await this.userService.checkIfIsLoggedIn();
-
-      console.log('isLogged', isLogged);
       return new Promise((resolve, reject) => {
         if (isLogged) {
           resolve(true);
         } else {
-          this.router.navigate(['/login']);
+          this.openPleaseLoginModal();
           resolve(false);
         }
       });
@@ -36,17 +38,23 @@ export class AuthGuard implements CanLoad, CanActivate {
     public async canLoad(route: Route): Promise<boolean> {
 
       const isLogged: boolean = await this.userService.checkIfIsLoggedIn();
-      console.log('isLogged', isLogged);
-
       return new Promise((resolve, reject) => {
         if (isLogged) {
           resolve(true);
         } else {
-          this.router.navigate(['/login']);
+          this.openPleaseLoginModal();
           resolve(false);
         }
       });
 
+    }
+
+    private async openPleaseLoginModal() {
+      const myModal = await this.modalController.create({
+        component: PleaseLoginModal,
+        cssClass: 'small-modal'
+      });
+      return await myModal.present();
     }
 
 }

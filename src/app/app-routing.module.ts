@@ -20,7 +20,9 @@ const routes: Routes = [
   { path: 'event-detail/:eventId',
     loadChildren: './event-detail/event-detail.module#EventDetailPageModule'
   },
-  { path: 'wish-list/:eventCode', loadChildren: './wish-list/wish-list.module#WishListPageModule' },
+  { path: 'wish-list/:eventCode', loadChildren: './wish-list/wish-list.module#WishListPageModule',
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard] },
 ];
 
 @NgModule({

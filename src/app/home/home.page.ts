@@ -4,6 +4,7 @@ import { MenuLink } from '../components/side-menu/side-menu.component';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomePage {
     private formBuilder: FormBuilder,
     private navController: NavController,
     private apiService: ApiService,
+    private storage: StorageService,
     ) {
     this.homeForm = this.formBuilder.group({
       code: ['', Validators.required]
@@ -36,6 +38,11 @@ export class HomePage {
         this.apiService.buildHeaders(),
       ).subscribe(respData => {
         if (respData.code === 200) {
+          this.storage.set('event', {
+            eventCode: this.homeForm.value.code,
+            board: respData.response.board,
+            eventId: respData.response.id,
+          });
           this.navController.navigateRoot(['/dashboard', this.homeForm.value.code]);
         } else {
           console.log(respData);

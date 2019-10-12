@@ -8,24 +8,31 @@
 </ion-header>
 
 <ion-content style="--background: url('assets/imgs/category-cover1.jpg');">
-  <div>
+  <form [formGroup]="messageForm" (submit)="onSubmit(($event))">
     <div class="avatar-small pt-4 wish-panel active">
-      <img [src]="'assets/imgs/category-cover1.jpg'">
-      <p class="h6 avatar-name"><b>Mario Rosii</b></p>
-      <ion-textarea maxlength="3000" class="wish-panel px-3"
-        [placeholder]="'whishList.placeholder' | translate"></ion-textarea>
+      <img [src]="'assets/icon/avatar.jpg'">
+      <p class="h6 avatar-name"><b>{{ username }}</b></p>
+        <ion-textarea maxlength="3000" class="wish-panel px-3" formControlName="content"
+          [placeholder]="'whishList.placeholder' | translate"></ion-textarea>
     </div>
     <ion-button small type="submit" color="primary" class="ml-auto">
       {{ 'whishList.publicBtn' | translate }}
     </ion-button>
+  </form>
+
+  <div class="bg-primary-light py-2 mt-4">
+    <div class="avatar-small pt-4 wish-panel" *ngFor="let message of eventService?.messages">
+      <img [src]="'assets/icon/avatar.jpg'">
+      <p class="h6 avatar-name"><b>{{message?.user?.username}}</b></p>
+      <p class="p-3">{{message.content}}</p>
+    </div>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)"
+    >
+      <ion-infinite-scroll-content
+        loadingSpinner="lines"
+        loadingText="">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
-  <div>
-    <div class="bg-primary-light py-2 mt-4">
-      <div class="avatar-small pt-4 wish-panel" *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9]">
-        <img [src]="'assets/imgs/category-cover1.jpg'">
-        <p class="h6 avatar-name"><b>Mario Rosii</b></p>
-        <p class="p-3">CIONE</p>
-      </div>
-  </div>
-  </div>
+
 </ion-content>

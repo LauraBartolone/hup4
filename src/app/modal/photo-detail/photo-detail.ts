@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
-import { runInThisContext } from 'vm';
+import { PhotosService } from '../../services/photos.services';
 
 @Component({
   selector: 'modal-photo-detail',
@@ -11,7 +11,6 @@ import { runInThisContext } from 'vm';
 export class PhotoDetailModal {
 
   public imgSrc: string;
-  public pictures: string;
   public currentIndex: number;
   public slideOpts = undefined;
 
@@ -20,9 +19,9 @@ export class PhotoDetailModal {
   constructor(
     public modalCtrl: ModalController,
     public navParams: NavParams,
+    public photosService: PhotosService,
     ) {
       this.currentIndex = navParams.get('currentIndex');
-      this.pictures = navParams.get('pictures');
       this.slideOpts = {
         initialSlide: this.currentIndex,
         speed: 100
@@ -31,6 +30,10 @@ export class PhotoDetailModal {
 
   public closeModal() {
     this.modalCtrl.dismiss();
+  }
+
+  public next() {
+    this.photosService.getPictures(this.photosService.nextPage);
   }
 
   public init() {

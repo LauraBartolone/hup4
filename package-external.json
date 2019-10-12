@@ -1,0 +1,17 @@
+{
+  "name": "hup",
+  "version": "1.0.0",
+  "author": "Hup Team",
+  "homepage": "https://hup.com/",
+  "description": "Photo share for your event",
+  "private": true,
+  "scripts": {
+  },
+  "dependencies": {
+    "cordova": "^9.0.0",
+    "ionic": "^5.2.5",
+    "node": "^12.8.1"
+  },
+  "devDependencies": {},
+  "config": {}
+}

@@ -26,6 +26,8 @@ import { StorageService } from './services/storage.service';
 import { EventService } from './services/event.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { PhotosService } from './services/photos.services';
+import { PleaseLoginModalModule } from './modal/please-login/please-login.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -39,6 +41,7 @@ export function createTranslateLoader(http: HttpClient) {
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    PleaseLoginModalModule,
     IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -58,6 +61,7 @@ export function createTranslateLoader(http: HttpClient) {
     StorageService,
     ApiService,
     EventService,
+    PhotosService,
     UserService,
     CoreService,
     Facebook,
