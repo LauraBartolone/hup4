@@ -35,7 +35,7 @@ export class EventService {
   public async initWishes(page = 1, event?) {
     if (Utils.isDefined(this.nextMessagesPage)) {
       await this.storageService.get('event').then(async (data) => {
-        data = JSON.parse(data);
+        // data = JSON.parse(data);
         const token = await this.userService.getToken();
         const queryParam = {
           board: data.board,
@@ -71,7 +71,7 @@ export class EventService {
     const isLogged = await this.userService.checkIfIsLoggedIn();
     if (isLogged) {
       await this.storageService.get('event').then(async (data) => {
-        data = JSON.parse(data);
+        // data = JSON.parse(data);
         // tslint:disable-next-line:no-string-literal
         body['board'] = data.board;
         const token = await this.userService.getToken();

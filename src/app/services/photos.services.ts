@@ -49,4 +49,19 @@ export class PhotosService {
     }
   }
 
+
+  public postImage(photoData, eventId) {
+    const data = {
+      image: photoData,
+      event: eventId
+    };
+    this.apiService.post( 'photos/',
+    this.apiService.buildHeaders(),
+    data).subscribe((respData) => {
+      if (!this.apiService.hasErrors(respData)) {
+        alert(respData);
+      }
+    });
+  }
+
 }

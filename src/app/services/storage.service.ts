@@ -52,7 +52,7 @@ export class StorageService {
       if (Utils.isDefined(this.localStorage)) {
         const value: string = this.localStorage.getItem(key);
         if (Utils.isDefined(value)) {
-          resolve(value);
+          resolve(JSON.parse(value));
           return;
         }
       }

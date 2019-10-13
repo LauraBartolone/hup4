@@ -99,7 +99,7 @@ export class UserService {
 
   public async checkIfIsLoggedIn() {
     return await this.storage.get('user').then((response) => {
-      const jsonObject = JSON.parse(response);
+      const jsonObject = response;
       if (Utils.isDefined(jsonObject.token) && !this.isTokenExpired(jsonObject.token)) {
         this.isAuthenticate.next(true);
         return true;
@@ -119,7 +119,7 @@ export class UserService {
 
   public async getToken() {
      return await this.storage.get('user').then((data) => {
-      data = JSON.parse(data);
+      // data = JSON.parse(data);
       if (Utils.isDefined(data.token)) {
       return data.token;
       }
@@ -128,7 +128,7 @@ export class UserService {
 
   public async getUser() {
     return await this.storage.get('user').then((data) => {
-     data = JSON.parse(data);
+    //  data = JSON.parse(data);
      if (Utils.isDefined(data)) {
      return data;
      }

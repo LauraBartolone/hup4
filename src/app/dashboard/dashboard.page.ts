@@ -1,13 +1,13 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonInfiniteScroll, ModalController } from '@ionic/angular';
-// import { PleaseLoginModal } from '../modal/please-login/please-login';
+import { IonInfiniteScroll, ModalController, Platform } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '../services/api.service';
 
 import { PhotoDetailModal } from '../modal/photo-detail/photo-detail';
 import { PhotosService } from '../services/photos.services';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { UserService } from '../services/user.service';
-import { PleaseLoginModal } from '../modal/please-login/please-login';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,13 +16,18 @@ import { PleaseLoginModal } from '../modal/please-login/please-login';
 })
 export class DashboardPage implements OnInit {
 
+  private imageResponse = [];
   @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
 
   constructor(
+    private imagePicker: ImagePicker,
     private modalController: ModalController,
     private route: ActivatedRoute,
     private router: Router,
     private photosService: PhotosService,
+    public platform: Platform,
+    private storageService: StorageService,
+    private userService: UserService,
   ) {
     this.route.params.subscribe(params => {
       // tslint:disable-next-line:radix
@@ -48,6 +53,49 @@ export class DashboardPage implements OnInit {
       componentProps: { currentIndex: index },
     });
     return await myModal.present();
+  }
+
+  public async loadPictures() {
+    const options: any = {
+      quality: 100,
+      maximumImagesCount: 15,
+      outputType: 1, // 1 BASE 64, 0 for FILEURI
+    };
+    this.imagePicker.getPictures(options).then((results) => {
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < results.length; i++) {
+        this.imageResponse.push('data:image/jpeg;base64,' + results[i]);
+      }
+      this.uploadPhotos();
+    }, (err) => { alert(err); });
+  }
+
+  public async  uploadPhotos() {
+    const eventId = await this.storageService.get('event').then(async (data) => {
+      return data.eventId;
+    });
+    console.log(eventId);
+    this.imageResponse.forEach(photo => {
+      this.photosService.postImage(photo, eventId);
+    });
+  }
+
+  public openGallery() {
+    if (this.platform.is('android')) {
+      this.imagePicker.hasReadPermission().then( resp => {
+        if (resp) {
+          this.loadPictures();
+        } else {
+          this.imagePicker.requestReadPermission().then( resp2 => {
+            if (resp2) {
+              this.loadPictures();
+            }
+          });
+        }
+      });
+    } else {
+      this.loadPictures();
+    }
   }
 
 }

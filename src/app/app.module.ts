@@ -22,6 +22,7 @@ import { ApiService } from './services/api.service';
 import { UserService } from './services/user.service';
 import { FacebookService } from './services/facebook.service';
 import { Camera } from '@ionic-native/camera/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { StorageService } from './services/storage.service';
 import { EventService } from './services/event.service';
 import { AuthGuard } from './services/auth-guard.service';
@@ -70,6 +71,7 @@ export function createTranslateLoader(http: HttpClient) {
     AuthGuard,
     JwtHelperService,
     Camera,
+    ImagePicker,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
