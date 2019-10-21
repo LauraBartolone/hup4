@@ -55,9 +55,11 @@ export class CreateEventPage implements OnInit {
           this.createEventForm.controls.date.setValue(params.date);
           this.createEventForm.controls.note.setValue(params.note);
           this.eventId = params.id;
-          // TODO add image : this.eventImg = params.image;
+          if (Utils.isDefined(params.image)) {
+            this.eventImg = params.image;
+          }
         }
-      });
+    });
   }
 
   public async onSubmit(ev: any) {

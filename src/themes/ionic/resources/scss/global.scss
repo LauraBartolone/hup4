@@ -98,6 +98,7 @@
 
   .cover-img {
     height: 25vh;
+    margin-top: 56px;
     width: 100%;
     position: absolute;
     object-fit: cover;
@@ -108,7 +109,7 @@
       width: 100%;
     }
     &+p, &+* {
-      margin-top: 25vh;
+      margin-top: calc(25vh + 56px);
     }
   }
 

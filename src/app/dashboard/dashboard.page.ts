@@ -8,6 +8,8 @@ import { PhotosService } from '../services/photos.services';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { UserService } from '../services/user.service';
 import { StorageService } from '../services/storage.service';
+// import { forkJoin } from 'rxjs';
+import { EventService } from '../services/event.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,6 +30,7 @@ export class DashboardPage implements OnInit {
     public platform: Platform,
     private storageService: StorageService,
     private userService: UserService,
+    public eventService: EventService
   ) {
     this.route.params.subscribe(params => {
       // tslint:disable-next-line:radix
@@ -45,6 +48,14 @@ export class DashboardPage implements OnInit {
   }
 
   ngOnInit() {
+    (await this.eventService.getEvent(this.eventId)).subscribe(respData => {
+      if (!this.apiService.hasErrors(respData)) {
+        this.event = respData.response;
+        console.log(this.event);
+    } else {
+      // TODO: #ERROR
+    }
+    });
   }
 
   public async openDetailPhotoModal(index) {
@@ -74,7 +85,6 @@ export class DashboardPage implements OnInit {
     const eventId = await this.storageService.get('event').then(async (data) => {
       return data.eventId;
     });
-    console.log(eventId);
     this.imageResponse.forEach(photo => {
       this.photosService.postImage(photo, eventId);
     });

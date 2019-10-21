@@ -10,12 +10,12 @@
 <ion-content padding class="bg-primary-gradient">
   <div class="text-white">
     <div class="text-center avatar">
-      <img *ngIf="true" [src]="eventImg">
-        <ion-fab class="small-fab" (click)="openGallery()">
-          <ion-fab-button color="secondary">
-            <ion-icon name="md-create"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+      <img [src]="eventImg">
+      <ion-fab class="small-fab" (click)="openGallery()">
+        <ion-fab-button color="secondary">
+          <ion-icon name="md-create"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </div>
     <form [formGroup]="createEventForm" (submit)="onSubmit(($event))" class="form-default">
       <ion-item color="transparent" lines="none" class="ion-no-padding">

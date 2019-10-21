@@ -7,6 +7,8 @@ import { Utils } from '../services/utils';
 })
 export class PhotosService {
 
+  public successCountUploads = 0;
+
   public eventCode: string;
   public nextPage = 1;
   private count = 0;
@@ -59,7 +61,7 @@ export class PhotosService {
     this.apiService.buildHeaders(),
     data).subscribe((respData) => {
       if (!this.apiService.hasErrors(respData)) {
-        alert(respData);
+        this.successCountUploads++;
       }
     });
   }

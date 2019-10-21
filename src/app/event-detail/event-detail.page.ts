@@ -40,8 +40,8 @@ export class EventDetailPage implements OnInit {
          name: this.event.name,
          note: this.event.note,
          date: this.event.date,
-         category: this.event.category
-         // TODO: add image
+         category: this.event.category,
+         image: this.event.image || null
       }
     });
   }
