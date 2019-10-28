@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MenuService } from 'src/app/services/menu.service';
 import { CoreService } from 'src/app/services/core.service';
 import { NavController } from '@ionic/angular';
@@ -14,7 +14,7 @@ export interface MenuLink {
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
 })
-export class SideMenuComponent implements OnInit {
+export class SideMenuComponent {
 
   constructor(
     public menu: MenuService,
@@ -22,12 +22,12 @@ export class SideMenuComponent implements OnInit {
     private navController: NavController,
   ) { }
 
-  ngOnInit() {
-    // same things of async pipe
-    // this.menu.details.subscribe((data) => {
-    //   console.log('side subscriver', data);
-    // });
-  }
+  // ngOnInit() {
+  //   // same things of async pipe
+  //   // this.menu.details.subscribe((data) => {
+  //   //   console.log('side subscriver', data);
+  //   // });
+  // }
 
   public navToPage(link: MenuLink) {
     console.log('Navigating to: ', link.linkHref);

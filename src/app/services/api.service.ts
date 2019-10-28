@@ -85,6 +85,12 @@ export class ApiService {
     });
   }
 
+  public delete(url: string, httpOptions): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+
+    });
+  }
+
   private appendAuthorization(headers, token) {
     // tslint:disable-next-line:object-literal-key-quotes
     headers = headers.append('Authorization', 'JWT ' + token);
