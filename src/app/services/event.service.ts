@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { UserService } from './user.service';
 import { Utils } from './utils';
+import { ToastController } from '@ionic/angular';
 
 
 @Injectable({
@@ -19,7 +20,8 @@ export class EventService {
   constructor(
     private apiService: ApiService,
     private userService: UserService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    public toastController: ToastController
   ) { }
 
   public async getEventList() {
@@ -67,8 +69,17 @@ export class EventService {
     }
   }
 
+  async successCreatedMessage() {
+    const toast = await this.toastController.create({
+      message: 'Success, Message sent!',
+      duration: 2000,
+      cssClass: 'toast-success'
+    });
+    toast.present();
+  }
+
   public async publishWish(body) {
-    const isLogged = await this.userService.checkIfIsLoggedIn();
+    const isLogged = await this.userService.isLoggedIn();
     if (isLogged) {
       await this.storageService.get('event').then(async (data) => {
         // data = JSON.parse(data);
@@ -79,7 +90,8 @@ export class EventService {
            this.apiService.buildHeaders(token), body)
           .subscribe(respData => {
             if (!this.apiService.hasErrors(respData)) {
-             this.initWishes();
+              this.initWishes();
+              this.successCreatedMessage();
             } else {
             // TODO: #ERROR
             console.log(respData);

@@ -14,7 +14,7 @@ export class AuthGuard implements CanLoad, CanActivate {
       ) {}
 
     public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-      const isLogged: boolean = await this.userService.checkIfIsLoggedIn();
+      const isLogged: boolean = await this.userService.isLoggedIn();
       return new Promise((resolve, reject) => {
         if (isLogged) {
           resolve(true);
@@ -37,7 +37,7 @@ export class AuthGuard implements CanLoad, CanActivate {
 
     public async canLoad(route: Route): Promise<boolean> {
 
-      const isLogged: boolean = await this.userService.checkIfIsLoggedIn();
+      const isLogged: boolean = await this.userService.isLoggedIn();
       return new Promise((resolve, reject) => {
         if (isLogged) {
           resolve(true);

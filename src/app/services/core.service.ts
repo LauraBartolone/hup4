@@ -13,14 +13,14 @@ export class CoreService {
 constructor(private router: Router, private platform: Platform) {
     this.platform.ready().then(() => {
       console.log('Core service init');
-      this.navEvents();
+      this.initMenu();
     });
   }
 
-  private navEvents() {
+  private initMenu() {
     this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((e: any) => {
       console.log(e);
-      this.showHideTabs(e);
+      this.getRoute(e);
     });
   }
 
@@ -38,7 +38,7 @@ constructor(private router: Router, private platform: Platform) {
     } catch (err) {}
   }
 
-  private showHideTabs(e: any) {
+  private getRoute(e: any) {
     const urlArray = e.url.split('/');
     const pageUrl = urlArray[1];
     const page = pageUrl.split('?')[0];

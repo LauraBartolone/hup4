@@ -50,9 +50,13 @@ export class StorageService {
     }
     return new Promise((resolve, reject) => {
       if (Utils.isDefined(this.localStorage)) {
-        const value: string = this.localStorage.getItem(key);
+        const value = this.localStorage.getItem(key);
+
         if (Utils.isDefined(value)) {
           resolve(JSON.parse(value));
+          return;
+        } else {
+          resolve(null);
           return;
         }
       }

@@ -70,7 +70,9 @@ export class CreateEventPage implements OnInit {
       name: this.createEventForm.value.name
     };
 
+    console.log('aaaa');
     const token = await this.userService.getToken();
+    console.log('bbb');
 
     if (this.isEditEvent) {
       this.editEvent(token);

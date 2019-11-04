@@ -46,10 +46,8 @@ export class WishListPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.eventService.initWishes();
+    this.eventService.initWishes(1);
     this.username = (await this.userService.getUser()).username;
-    console.log(this.username);
-    // this.api
   }
 
 }

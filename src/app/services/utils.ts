@@ -24,6 +24,21 @@ export class Utils {
     static isDefined(value: any): boolean {
       return value !== undefined && value !== null;
     }
+
+    static isNonEmptyObject(value: { [key: string]: any }): boolean {
+      return Utils.isTrueObject(value) && Object.getOwnPropertyNames(value).length > 0;
+    }
+    static isTrueObject(value: any): boolean {
+      return Utils.isDefined(value) && Utils.isObject(value);
+    }
+    static isEmptyObject(value: { [key: string]: any }): boolean {
+      return (Utils.isTrueObject(value) && Object.getOwnPropertyNames(value).length === 0);
+    }
+        // typeof null returns 'object', see isTrueObject
+    static isObject(value: any): boolean {
+      return typeof value === 'object';
+    }
+
 }
 
 export interface Environment {

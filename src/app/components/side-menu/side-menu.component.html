@@ -22,14 +22,22 @@
 -->
   </ion-header>
   <ion-content>
-    <div class="text-center avatar">
-      <img *ngIf="true" [src]="'assets/imgs/category-cover1.jpg'" class="mb-2">
-      <p class="h4 font-weight-bold"> MArio ROssi</p>
+    <div class="text-center avatar" *ngIf="isLoggedIn">
+      <img *ngIf="true" [src]="'assets/icon/avatar.jpg'" class="mb-2">
+      <p class="h4 font-weight-bold"> {{ user?.username }}</p>
 
     </div>
     <ion-list>
-      <ion-item *ngFor="let link of (menu?.details | async)" detail (click)="navToPage(link)">
+      <ion-item *ngFor="let link of (menu?.details | async)" detail (click)="navToPage(link)"
+        [hidden]="!isLoggedIn && link.isProtected"
+      >
         {{link?.title}}
+      </ion-item>
+      <ion-item *ngIf="isLoggedIn" detail (click)="logout()">
+        Logout
+      </ion-item>
+      <ion-item *ngIf="!isLoggedIn" detail (click)="login()">
+        Login
       </ion-item>
     </ion-list>
   </ion-content>

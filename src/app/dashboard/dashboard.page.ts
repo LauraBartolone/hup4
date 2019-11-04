@@ -10,6 +10,8 @@ import { UserService } from '../services/user.service';
 import { StorageService } from '../services/storage.service';
 // import { forkJoin } from 'rxjs';
 import { EventService } from '../services/event.service';
+import { MenuLink } from '../components/side-menu/side-menu.component';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +24,7 @@ export class DashboardPage implements OnInit {
   @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
 
   constructor(
+    private menu: MenuService,
     private imagePicker: ImagePicker,
     private modalController: ModalController,
     private route: ActivatedRoute,
@@ -47,15 +50,31 @@ export class DashboardPage implements OnInit {
     this.photosService.getPictures(this.photosService.nextPage, event);
   }
 
+  ionViewWillEnter() {
+    const sideLinks: MenuLink[] = [
+      {
+        isProtected: false,
+        title: 'Create event',
+        linkHref: 'create-event-category',
+      },
+      {
+        isProtected: true,
+        title: 'My events',
+        linkHref: 'profile-events-list',
+      },
+    ];
+    this.menu.details.next(sideLinks);
+  }
+
   ngOnInit() {
-    (await this.eventService.getEvent(this.eventId)).subscribe(respData => {
-      if (!this.apiService.hasErrors(respData)) {
-        this.event = respData.response;
-        console.log(this.event);
-    } else {
-      // TODO: #ERROR
-    }
-    });
+    // (await this.eventService.getEvent(this.eventId)).subscribe(respData => {
+    //   if (!this.apiService.hasErrors(respData)) {
+    //     this.event = respData.response;
+    //     console.log(this.event);
+    // } else {
+    //   // TODO: #ERROR
+    // }
+    // });
   }
 
   public async openDetailPhotoModal(index) {

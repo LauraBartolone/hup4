@@ -7,8 +7,14 @@ const routes: Routes = [
   { path: 'welcome', loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule)},
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'dashboard/:code', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
-  { path: 'create-event-category', loadChildren: './create-event-category/create-event-category.module#CreateEventCategoryPageModule' },
-  { path: 'create-event/:eventCategory', loadChildren: './create-event/create-event.module#CreateEventPageModule' },
+  { path: 'create-event-category', loadChildren: './create-event-category/create-event-category.module#CreateEventCategoryPageModule',
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
+  },
+  { path: 'create-event/:eventCategory', loadChildren: './create-event/create-event.module#CreateEventPageModule',
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
+  },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'registration', loadChildren: './registration/registration.module#RegistrationPageModule' },
   { path: 'pw-recovery', loadChildren: './pw-recovery/pw-recovery.module#PwRecoveryPageModule' },

@@ -11,6 +11,7 @@ export class PhotosService {
 
   public eventCode: string;
   public nextPage = 1;
+
   private count = 0;
   public queryParam = {
     event: '',

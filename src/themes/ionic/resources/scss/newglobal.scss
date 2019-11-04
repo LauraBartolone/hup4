@@ -121,4 +121,8 @@ button[disabled] {
     font-size: 14px;
   }
 
+  ion-toast.toast-success {
+    --background: rgb(94, 126, 94);
+}
+
 }

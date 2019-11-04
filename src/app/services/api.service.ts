@@ -9,7 +9,7 @@ import { Observable, Observer } from 'rxjs';
 })
 export class ApiService {
   apiUrl: string = environment.API_URL;
-  token: any;
+  // token: string;
 
   constructor(
     private http: HttpClient,
@@ -91,13 +91,13 @@ export class ApiService {
     });
   }
 
-  private appendAuthorization(headers, token) {
+  private appendAuthorization(headers: HttpHeaders, token: string) {
     // tslint:disable-next-line:object-literal-key-quotes
     headers = headers.append('Authorization', 'JWT ' + token);
     return headers;
   }
 
-  private buildResponse(code, data, error = []) {
+  private buildResponse(code: number, data, error = []) {
     // tslint:disable-next-line:no-string-literal
     if (Utils.isDefined(error['non_field_errors'])) {
       // tslint:disable-next-line:no-string-literal
@@ -119,7 +119,6 @@ export class ApiService {
   }
 
   public buildQueryString(queryObj) {
-    console.log(queryObj);
     return Object.keys(queryObj).map(key => {
       return key + '=' + queryObj[key];
     }).join('&');

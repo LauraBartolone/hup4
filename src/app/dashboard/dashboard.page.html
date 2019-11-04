@@ -14,7 +14,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="4" size-md="3" *ngFor="let photo of photosService.pictures; let i = index">
-        <post-image [imgSrc]="photo.image" (click)="openDetailPhotoModal(i)">
+        <post-image [imgSrc]="photo.image" (click)="openDetailPhotoModal(i)" class="wrapper">
         </post-image>
       </ion-col>
     </ion-row>

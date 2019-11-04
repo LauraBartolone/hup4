@@ -11,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class UserService {
-  private token: undefined;
+  // private token: undefined;
 
   public isAuthenticate = new BehaviorSubject(false);
 
@@ -24,7 +24,7 @@ export class UserService {
     public alertController: AlertController) {
     }
 
-  public isTokenExpired(token) {
+  public isTokenExpired(token: string) {
     const helper = new JwtHelperService();
     // console.log('decoded', helper.decodeToken(token));
     return helper.isTokenExpired(token);
@@ -86,9 +86,10 @@ export class UserService {
     this.fbService.doFbLogin();
   }
 
-  public logout() {
+  public async logout() {
+    const token = await this.getToken();
     this.apiService.post('rest-auth/logout/',
-      this.apiService.buildHeaders('miotoken')
+      this.apiService.buildHeaders(token)
     ).subscribe(respData => {
       if (!this.apiService.hasErrors(respData)) {
         this.storage.remove('user');
@@ -97,7 +98,7 @@ export class UserService {
     });
   }
 
-  public async checkIfIsLoggedIn() {
+  public async isLoggedIn() {
     return await this.storage.get('user').then((response) => {
       const jsonObject = response;
       if (Utils.isDefined(jsonObject.token) && !this.isTokenExpired(jsonObject.token)) {
@@ -113,15 +114,13 @@ export class UserService {
       } );
   }
 
-  public isLoggeedIn(): boolean {
-    return this.isAuthenticate.value;
-  }
-
   public async getToken() {
      return await this.storage.get('user').then((data) => {
       // data = JSON.parse(data);
-      if (Utils.isDefined(data.token)) {
-      return data.token;
+      if (Utils.isDefined(data) && Utils.isDefined(data.token)) {
+        return data.token;
+      } else {
+        return undefined;
       }
     });
   }

@@ -59,11 +59,13 @@ export class HomePage {
   ionViewWillEnter() {
     const sideLinks: MenuLink[] = [
       {
-        title: 'Crea evento',
+        isProtected: false,
+        title: 'Create event',
         linkHref: 'create-event-category',
       },
       {
-        title: 'I miei eventi',
+        isProtected: true,
+        title: 'My events',
         linkHref: 'profile-events-list',
       },
     ];
