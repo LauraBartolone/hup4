@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { FacebookService } from './facebook.service';
-import { LoadingController, AlertController, Platform } from '@ionic/angular';
+import { LoadingController, AlertController, Platform, NavController } from '@ionic/angular';
 import { StorageService } from './storage.service';
 import { Utils } from './utils';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
@@ -21,6 +21,7 @@ export class UserService {
     private fbService: FacebookService,
     private storage: StorageService,
     private loadingController: LoadingController,
+    private navController: NavController,
     public alertController: AlertController) {
     }
 
@@ -41,6 +42,7 @@ export class UserService {
           token: respData.response.token,
           username: data.username,
         });
+        this.redirect();
       } else {
         this.showAlert(respData.errors[0]);
       }
@@ -65,9 +67,19 @@ export class UserService {
         });
 
         this.isAuthenticate.next(true);
+
+        this.redirect();
       } else {
         this.showAlert(respData.errors[0]);
         this.isAuthenticate.next(false);
+      }
+    });
+  }
+
+  public redirect() {
+    this.storage.get('loginRedirect').then(data => {
+      if (Utils.isDefined(data) && Utils.isDefined(data.url)) {
+        this.navController.navigateRoot([data.url]);
       }
     });
   }

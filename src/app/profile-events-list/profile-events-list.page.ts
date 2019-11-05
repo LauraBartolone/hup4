@@ -1,8 +1,6 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
+import { Component } from '@angular/core';
 import { EventService } from '../services/event.service';
-import { ApiService } from '../services/api.service';
 import { AlertController } from '@ionic/angular';
 import { MenuLink } from '../components/side-menu/side-menu.component';
 import { MenuService } from '../services/menu.service';
@@ -12,7 +10,7 @@ import { MenuService } from '../services/menu.service';
   templateUrl: './profile-events-list.page.html',
   styleUrls: ['./profile-events-list.page.scss'],
 })
-export class ProfileEventsListPage implements OnInit {
+export class ProfileEventsListPage {
 
   public events = [];
 

@@ -12,6 +12,7 @@ import { StorageService } from '../services/storage.service';
 import { EventService } from '../services/event.service';
 import { MenuLink } from '../components/side-menu/side-menu.component';
 import { MenuService } from '../services/menu.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,6 +24,8 @@ export class DashboardPage implements OnInit {
   private imageResponse = [];
   @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
 
+  public event: any;
+
   constructor(
     private menu: MenuService,
     private imagePicker: ImagePicker,
@@ -33,7 +36,8 @@ export class DashboardPage implements OnInit {
     public platform: Platform,
     private storageService: StorageService,
     private userService: UserService,
-    public eventService: EventService
+    public eventService: EventService,
+    public apiService: ApiService,
   ) {
     this.route.params.subscribe(params => {
       // tslint:disable-next-line:radix
@@ -67,8 +71,11 @@ export class DashboardPage implements OnInit {
     this.menu.details.next(sideLinks);
   }
 
-  ngOnInit() {
-    // (await this.eventService.getEvent(this.eventId)).subscribe(respData => {
+  async initEvent() {
+    // const eventId = await this.storageService.get('event').then(async (data) => {
+    //   return data.eventId;
+    // });
+    // this.event = (await this.eventService.getEvent(eventId)).subscribe(respData => {
     //   if (!this.apiService.hasErrors(respData)) {
     //     this.event = respData.response;
     //     console.log(this.event);
@@ -76,6 +83,10 @@ export class DashboardPage implements OnInit {
     //   // TODO: #ERROR
     // }
     // });
+  }
+
+  ngOnInit() {
+    this.initEvent();
   }
 
   public async openDetailPhotoModal(index) {

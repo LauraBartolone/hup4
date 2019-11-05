@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'modal-please-login',
@@ -12,7 +13,9 @@ export class PleaseLoginModal {
 
   constructor(
     private router: Router,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    private storage: StorageService
+    ) {
 
   }
 
@@ -21,6 +24,9 @@ export class PleaseLoginModal {
   }
 
   public goToLogin() {
+    this.storage.set('loginRedirect', {
+      url: this.router.url,
+    });
     this.modalCtrl.dismiss();
     this.router.navigate(['/login']);
 

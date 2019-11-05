@@ -24,7 +24,9 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'event-detail/:eventId',
-    loadChildren: './event-detail/event-detail.module#EventDetailPageModule'
+    loadChildren: './event-detail/event-detail.module#EventDetailPageModule',
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   { path: 'wish-list/:eventCode', loadChildren: './wish-list/wish-list.module#WishListPageModule',
     canLoad: [AuthGuard],

@@ -3,6 +3,8 @@ import { MenuService } from 'src/app/services/menu.service';
 import { CoreService } from 'src/app/services/core.service';
 import { NavController } from '@ionic/angular';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
+import { StorageService } from '../../services/storage.service';
 
 
 export interface MenuLink {
@@ -25,7 +27,9 @@ export class SideMenuComponent implements OnInit {
     public menu: MenuService,
     public core: CoreService,
     private navController: NavController,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
+    private storage: StorageService
   ) { }
 
   ngOnInit() {
@@ -59,6 +63,9 @@ export class SideMenuComponent implements OnInit {
   }
 
   public login() {
+    this.storage.set('loginRedirect', {
+      url: this.router.url,
+    });
     this.navController.navigateForward('login');
   }
 }
