@@ -1,20 +1,21 @@
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { EventSettingsModalPage } from '../modal/event-settings-modal/settings-modal.page';
 import * as moment from 'moment';
 import { ApiService } from '../services/api.service';
 import { Utils } from '../services/utils';
 import { UserService } from '../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.page.html',
   styleUrls: ['./create-event.page.scss'],
 })
-export class CreateEventPage implements OnInit {
+export class CreateEventPage {
   momentjs: any = moment;
   public createEventForm: FormGroup;
   public eventCategory: number;
@@ -25,6 +26,7 @@ export class CreateEventPage implements OnInit {
   private eventId;
 
   public requestData;
+  private subscription: Subscription;
 
   constructor(
     private camera: Camera,
@@ -33,6 +35,7 @@ export class CreateEventPage implements OnInit {
     public modalController: ModalController,
     public apiService: ApiService,
     public userService: UserService,
+    private router: Router,
     ) {
     this.createEventForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -41,13 +44,13 @@ export class CreateEventPage implements OnInit {
     });
     this.route.params.subscribe(params => {
       // tslint:disable-next-line:radix
-      this.eventCategory = parseInt(params.eventCategory) + 1;
-      this.eventImg = 'assets/imgs/category-cover' + this.eventCategory + '.jpg';
+      this.eventCategory = parseInt(params.eventCategory);
+      this.eventImg = 'assets/imgs/category-cover' + (this.eventCategory) + '.jpg';
     });
   }
 
-  ngOnInit() {
-    this.route.queryParams
+  ionViewWillEnter() {
+    this.subscription = this.route.queryParams
       .subscribe(params => {
         if (Utils.isNonEmptyObject(params)) {
           this.isEditEvent = true;
@@ -62,6 +65,10 @@ export class CreateEventPage implements OnInit {
     });
   }
 
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
+  }
+
   public async onSubmit(ev: any) {
     this.requestData = {
       date: this.momentjs(new Date(this.createEventForm.value.date)).format('YYYY-MM-DD'),
@@ -69,11 +76,7 @@ export class CreateEventPage implements OnInit {
       category: this.eventCategory,
       name: this.createEventForm.value.name
     };
-
-    console.log('aaaa');
     const token = await this.userService.getToken();
-    console.log('bbb');
-
     if (this.isEditEvent) {
       this.editEvent(token);
     } else {
@@ -86,7 +89,11 @@ export class CreateEventPage implements OnInit {
       this.apiService.buildHeaders(token),
       this.requestData
     ).subscribe((resp) => {
-      console.log(resp);
+      if (!this.apiService.hasErrors(resp)) {
+        this.goToProfileEvents();
+    } else {
+      // TODO: #ERROR
+    }
     });
   }
 
@@ -95,8 +102,17 @@ export class CreateEventPage implements OnInit {
       this.apiService.buildHeaders(token),
       this.requestData
     ).subscribe((resp) => {
-      console.log(resp);
+      console.log(resp, this.apiService.hasErrors(resp));
+      if (!this.apiService.hasErrors(resp)) {
+        this.goToProfileEvents();
+    } else {
+      // TODO: #ERROR
+    }
     });
+  }
+
+  public goToProfileEvents() {
+    this.router.navigate(['/profile-events-list']);
   }
 
   public async openModalSettings() {

@@ -1,6 +1,7 @@
 {
   "welcome": "Welcome!",
   "createEvent": "Crea il mio evento!",
+  "editEvent": "Modifica evento",
   "menuCreateEvent": "Crea evento",
   "save": "salva",
   "guestJoin": "Partecipa da invitato",
@@ -41,7 +42,10 @@
     "eventDetailTitle": "Dettaglio Evento",
     "eventCode": "Codice evento: ",
     "eventCodeDescription": "Condividi il codice con i tuoi invitati! Invitali a scaricare la nostra APP!",
-    "eventCodeDescription2": "Usa i nostri pulsanti oppure invialo tramite il canale che preferisci."
+    "eventCodeDescription2": "Usa i nostri pulsanti oppure invialo tramite il canale che preferisci.",
+    "guestCodeLong":"Event code for guests",
+    "warning": "Warning",
+    "unsaved": "Unsaved photos will be lost! Are you sure you want to continue?"
   },
   "category": {
       "wedding": "Wedding",

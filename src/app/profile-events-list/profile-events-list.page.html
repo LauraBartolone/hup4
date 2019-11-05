@@ -10,7 +10,7 @@
 
 <ion-content class="ion-padding bg-primary-gradient">
   <div class="profile-events">
-    <div class="image-bg" *ngFor="let event of events">
+    <div class="image-bg" *ngFor="let event of eventService.events">
       <img [src]="'assets/imgs/category-cover'+ event.category +'.jpg'">
       <ion-icon class="go-arrow" name="ios-arrow-forward"
         (click)="goToDetailEvent(event.id)" item-left
@@ -19,21 +19,21 @@
       <div class="overview">
         <p><b>{{event.name}}</b></p>
         <p class="small">{{event.date}}</p>
-        <p class="small">codice evento per gli invitati: <b>{{event.code}}</b></p>
+        <p class="small">{{ 'profile.guestCodeLong' | translate }}: <b>{{event.code}}</b></p>
       </div>
 
       <div class="w-100 image-link-default">
-        <p class="text-link">
+        <p class="text-link"  (click)="savePhotos(event.id)">
           <span>
             <ion-icon name="download" item-left></ion-icon>
           </span>
-          salva foto
+          save photos
         </p>
-        <p class="text-link">
+        <p class="text-link" (click)="deleteEvent(event.id)">
           <span>
             <ion-icon name="trash" item-left></ion-icon>
           </span>
-          elimina evento
+          delete event
         </p>
       </div>
     </div>

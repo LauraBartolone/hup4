@@ -63,6 +63,7 @@ export class DashboardPage implements OnInit {
         linkHref: 'profile-events-list',
       },
     ];
+    this.menu.title.next('Dashboard');
     this.menu.details.next(sideLinks);
   }
 

@@ -9,6 +9,7 @@ export class CoreService {
   showSideMenuPages: string[] = [
     'home',
     'dashboard',
+    'profile-events-list',
   ];
 constructor(private router: Router, private platform: Platform) {
     this.platform.ready().then(() => {

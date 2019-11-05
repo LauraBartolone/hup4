@@ -69,6 +69,7 @@ export class HomePage {
         linkHref: 'profile-events-list',
       },
     ];
+    this.menu.title.next('Home');
     this.menu.details.next(sideLinks);
   }
 

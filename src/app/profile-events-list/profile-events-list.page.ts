@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { EventService } from '../services/event.service';
 import { ApiService } from '../services/api.service';
+import { AlertController } from '@ionic/angular';
+import { MenuLink } from '../components/side-menu/side-menu.component';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-profile-events-list',
@@ -15,23 +18,60 @@ export class ProfileEventsListPage implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService,
-    private eventService: EventService,
-    private apiService: ApiService) {
+    public alertController: AlertController,
+    public eventService: EventService,
+    private menu: MenuService,) {
     }
-
-    async ngOnInit() {
-      (await this.eventService.getEventList()).subscribe(respData => {
-        if (!this.apiService.hasErrors(respData)) {
-          this.events = respData.response;
-      } else {
-        // TODO: #ERROR
-      }
-      });
-      // this.api
-  }
 
   public goToDetailEvent(eventId) {
     this.router.navigate(['/event-detail', eventId]);
+  }
+
+  public deleteEvent(eventId) {
+    this.presentAlertConfirm(eventId);
+  }
+
+  public savePhotos(eventId) {
+    this.eventService.downloadPhoto(eventId);
+  }
+
+  async presentAlertConfirm(eventId) {
+    const alert = await this.alertController.create({
+      header: 'Warning',
+      message: 'Unsaved photos will be lost! Are you sure you want to continue?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        }, {
+          text: 'Delete event',
+          handler: () => {
+            this.eventService.deleteEvent(eventId);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  ionViewWillEnter() {
+    this.eventService.getEventList();
+    const sideLinks: MenuLink[] = [
+      {
+        isProtected: false,
+        title: 'Create event',
+        linkHref: 'create-event-category',
+      },
+      {
+        isProtected: true,
+        title: 'My events',
+        linkHref: 'profile-events-list',
+      },
+    ];
+    this.menu.title.next('My events list');
+    this.menu.details.next(sideLinks);
   }
 }

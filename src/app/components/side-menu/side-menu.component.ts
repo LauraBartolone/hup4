@@ -18,6 +18,7 @@ export interface MenuLink {
 })
 export class SideMenuComponent implements OnInit {
 
+  public menuTitle: '';
   public isLoggedIn = false;
   public user = undefined;
   constructor(

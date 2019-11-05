@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="create-event-category" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title> {{ 'createEvent' | translate }}</ion-title>
+    <ion-title> {{ (isEditEvent ? 'editEvent' : 'createEvent') | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../services/event.service';
 import { ApiService } from '../services/api.service';
+import { MenuLink } from '../components/side-menu/side-menu.component';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -13,6 +15,7 @@ export class EventDetailPage implements OnInit {
   public event: any;
 
   constructor(private router: Router,
+              private menu: MenuService,
               private route: ActivatedRoute,
               private eventService: EventService,
               private apiService: ApiService) {
@@ -20,6 +23,22 @@ export class EventDetailPage implements OnInit {
       // tslint:disable-next-line:radix
       this.eventId = parseInt(params.eventId);
     });
+  }
+  ionViewWillEnter() {
+    const sideLinks: MenuLink[] = [
+      {
+        isProtected: false,
+        title: 'Create event',
+        linkHref: 'create-event-category',
+      },
+      {
+        isProtected: true,
+        title: 'My events',
+        linkHref: 'profile-events-list',
+      },
+    ];
+    this.menu.title.next('My event');
+    this.menu.details.next(sideLinks);
   }
 
   async ngOnInit() {

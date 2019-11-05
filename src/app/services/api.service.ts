@@ -87,7 +87,19 @@ export class ApiService {
 
   public delete(url: string, httpOptions): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-
+      this.http.delete(this.apiUrl + url, httpOptions)
+      .subscribe(data => {
+        // tslint:disable-next-line:no-string-literal
+        observer.next(
+          this.buildResponse(200, data)
+        );
+        observer.complete();
+       }, error => {
+        observer.next(
+          this.buildResponse(error.status, undefined, error.error)
+        );
+        observer.complete();
+      });
     });
   }
 

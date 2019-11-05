@@ -30,10 +30,12 @@
     display: block;
   }
   .image-bg {
+    height: 220px;
     margin-bottom: 1px;
     position: relative;
     &::before {
       background: linear-gradient(180deg, rgba(0, 0, 0,  0.5) 0%, rgba(0, 0, 0, 0.2) 100%);
+      background-size: cover;
       position: absolute;
       content: '';
       display: block;
