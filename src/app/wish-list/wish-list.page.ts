@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './wish-list.page.html',
   styleUrls: ['./wish-list.page.scss'],
 })
-export class WishListPage implements OnInit {
+export class WishListPage {
 
   public username = '';
   public eventCode = '';
@@ -32,7 +32,7 @@ export class WishListPage implements OnInit {
 
   public async onSubmit(ev: any) {
     if (this.messageForm.valid) {
-      this.eventService.publishWish({
+     await this.eventService.publishWish({
         content: this.messageForm.value.content,
       });
     } else {
@@ -41,14 +41,12 @@ export class WishListPage implements OnInit {
   }
 
   public loadData(event) {
-    console.log(event);
     this.eventService.initWishes(this.eventService.nextMessagesPage, event);
   }
 
-  async ngOnInit() {
-    this.eventService.initWishes(1);
+  async ionViewWillEnter() {
+    this.eventService.initWishes(-1);
     this.username = (await this.userService.getUser()).username;
-
   }
 
 }

@@ -13,8 +13,8 @@
     "home": {
         "eventCodeTitle": "Inserisci il codice evento",
         "note": "Note dei festeggiati",
-        "goBtn": "VAI!"
-
+        "goBtn": "VAI!",
+        "goBtnDetail": "VAI ALL'EVENTO!"
     },
     "error": {
       "required": "campo obbligatorio",

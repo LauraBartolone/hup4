@@ -98,13 +98,14 @@
 
   .cover-img {
     height: 25vh;
-    margin-top: 56px;
+    margin-top: 44px;
     width: 100%;
     position: absolute;
     object-fit: cover;
     top: 0;
     left: 0;
     &>img {
+      object-fit: cover;
       height: inherit;
       width: 100%;
     }

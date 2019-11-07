@@ -10,4 +10,13 @@ ion-button {
 
 .bg-primary-light {
   background: rgba(151, 46, 63, 0.534);
+  min-height: 100%;
+}
+
+
+ion-content.bg-image {
+  --background: transparent;
+  background-image: url('../../assets/imgs/category-cover1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }

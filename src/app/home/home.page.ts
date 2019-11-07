@@ -42,6 +42,8 @@ export class HomePage {
             eventCode: this.homeForm.value.code,
             board: respData.response.board,
             eventId: respData.response.id,
+            image: respData.response.image,
+            category: respData.response.category,
           });
           this.navController.navigateRoot(['/dashboard', this.homeForm.value.code]);
         } else {

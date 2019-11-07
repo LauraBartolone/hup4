@@ -4,6 +4,8 @@ import { EventService } from '../services/event.service';
 import { ApiService } from '../services/api.service';
 import { MenuLink } from '../components/side-menu/side-menu.component';
 import { MenuService } from '../services/menu.service';
+import { StorageService } from '../services/storage.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-event-detail',
@@ -18,7 +20,9 @@ export class EventDetailPage implements OnInit {
               private menu: MenuService,
               private route: ActivatedRoute,
               private eventService: EventService,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private storage: StorageService,
+              private navController: NavController) {
     this.route.params.subscribe(params => {
       // tslint:disable-next-line:radix
       this.eventId = parseInt(params.eventId);
@@ -49,6 +53,26 @@ export class EventDetailPage implements OnInit {
     } else {
       // TODO: #ERROR
     }
+    });
+  }
+
+  goToDashboard() {
+    this.apiService.get(
+      'event/' + this.event.code + '/',
+      this.apiService.buildHeaders(),
+    ).subscribe(respData => {
+      if (respData.code === 200) {
+        this.storage.set('event', {
+          eventCode: this.event.code,
+          board: respData.response.board,
+          eventId: respData.response.id,
+          image: respData.response.image,
+          category: respData.response.category,
+        });
+        this.navController.navigateRoot(['/dashboard', this.event.code]);
+      } else {
+       // TODO: HANDLE ERROR
+      }
     });
   }
 

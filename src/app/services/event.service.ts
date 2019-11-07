@@ -59,20 +59,26 @@ export class EventService {
   }
 
   public async initWishes(page = 1, event?) {
-    if (Utils.isDefined(this.nextMessagesPage)) {
+    if (Utils.isDefined(this.nextMessagesPage) || page === -1) {
+      if (page === -1) {
+        this.nextMessagesPage = 1;
+      }
+      console.log(this.nextMessagesPage);
       await this.storageService.get('event').then(async (data) => {
         // data = JSON.parse(data);
         const token = await this.userService.getToken();
+
         const queryParam = {
           board: data.board,
           page: this.nextMessagesPage,
         };
-        return this.apiService.get('board-messages/',
+        return await this.apiService.get('board-messages/',
            this.apiService.buildHeaders(token),
            queryParam)
           .subscribe(respData => {
+            console.log(respData);
             if (!this.apiService.hasErrors(respData)) {
-              if (page === 1) {
+              if (page === 1 || page === -1) {
                 this.messages = [];
               }
               this.messages.push(...respData.response.results);
@@ -141,7 +147,7 @@ export class EventService {
            this.apiService.buildHeaders(token), body)
           .subscribe(respData => {
             if (!this.apiService.hasErrors(respData)) {
-              this.initWishes();
+              this.initWishes(-1);
               this.successCreatedMessage();
             } else {
             // TODO: #ERROR

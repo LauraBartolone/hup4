@@ -72,17 +72,10 @@ export class DashboardPage implements OnInit {
   }
 
   async initEvent() {
-    // const eventId = await this.storageService.get('event').then(async (data) => {
-    //   return data.eventId;
-    // });
-    // this.event = (await this.eventService.getEvent(eventId)).subscribe(respData => {
-    //   if (!this.apiService.hasErrors(respData)) {
-    //     this.event = respData.response;
-    //     console.log(this.event);
-    // } else {
-    //   // TODO: #ERROR
-    // }
-    // });
+    this.event = await this.storageService.get('event').then(async (data) => {
+      return data;
+    });
+
   }
 
   ngOnInit() {

@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="--background: url('assets/imgs/category-cover1.jpg');">
+<ion-content class="bg-image">
   <form [formGroup]="messageForm" (submit)="onSubmit(($event))">
     <div class="avatar-small pt-4 wish-panel active">
       <img [src]="'assets/icon/avatar.jpg'">
@@ -21,6 +21,11 @@
   </form>
 
   <div class="bg-primary-light py-2 mt-4">
+    <p *ngIf="eventService?.messages && eventService?.messages.length == 0"
+      class="text-center text-white"
+    >
+      Be the first!
+    </p>
     <div class="avatar-small pt-4 wish-panel" *ngFor="let message of eventService?.messages">
       <img [src]="'assets/icon/avatar.jpg'">
       <p class="h6 avatar-name"><b>{{message?.user?.username}}</b></p>

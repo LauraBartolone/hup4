@@ -1,6 +1,6 @@
 <ion-content class="bg-primary-gradient">
   <div class="cover-img">
-    <img [src]="'assets/imgs/category-cover1.jpg'">
+    <img [src]=" event?.image ? 'http://'+event?.image : ('assets/imgs/category-cover'+ event?.category +'.jpg')">
     <!-- event.image ? event.image : ('assets/imgs/category-cover'+ event.category +'.jpg') -->
     <div class="w-100 image-link-default">
       <p class="text-link" (click)="goToWishList()"> {{ 'dashboard.boardWishes'| translate }}
@@ -14,7 +14,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="4" size-md="3" *ngFor="let photo of photosService.pictures; let i = index">
-        <post-image [imgSrc]="photo.image" (click)="openDetailPhotoModal(i)" class="wrapper">
+        <post-image [imgSrc]="photo.preview" (click)="openDetailPhotoModal(i)" class="wrapper">
         </post-image>
       </ion-col>
     </ion-row>
