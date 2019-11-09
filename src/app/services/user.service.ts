@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { FacebookService } from './facebook.service';
-import { LoadingController, AlertController, Platform, NavController } from '@ionic/angular';
+import { LoadingController, AlertController, Platform, NavController, ToastController } from '@ionic/angular';
 import { StorageService } from './storage.service';
 import { Utils } from './utils';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
@@ -22,7 +22,8 @@ export class UserService {
     private storage: StorageService,
     private loadingController: LoadingController,
     private navController: NavController,
-    public alertController: AlertController) {
+    public alertController: AlertController,
+    private toastController: ToastController) {
     }
 
   public isTokenExpired(token: string) {
@@ -43,6 +44,7 @@ export class UserService {
           username: data.username,
         });
         this.isAuthenticate.next(true);
+        this.successGeneric();
         this.redirect();
       } else {
         this.showAlert(respData.errors[0]);
@@ -66,9 +68,8 @@ export class UserService {
           token: respData.response.token,
           username: data.username,
         });
-
         this.isAuthenticate.next(true);
-
+        this.successGeneric();
         this.redirect();
       } else {
         this.showAlert(respData.errors[0]);
@@ -149,6 +150,15 @@ export class UserService {
 
   public async presentLoading(loading) {
     return await loading.present();
+  }
+
+  async successGeneric() {
+    const toast = await this.toastController.create({
+      message: 'The operation was successful!',
+      duration: 2000,
+      cssClass: 'toast-success'
+    });
+    toast.present();
   }
 
 }

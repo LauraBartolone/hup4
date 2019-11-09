@@ -23,7 +23,7 @@ export class CreateEventPage {
   public eventCategory: number;
   public eventImg: string;
   public minDate = this.momentjs(new Date()).format('YYYY-MM-DD');
-
+  public submitted = false;
   private isEditEvent = false;
   private eventId;
 
@@ -73,18 +73,23 @@ export class CreateEventPage {
     this.subscription.unsubscribe();
   }
 
+  get f() { return this.createEventForm.controls; }
+
   public async onSubmit(ev: any) {
-    this.requestData = {
-      date: this.momentjs(new Date(this.createEventForm.value.date)).format('YYYY-MM-DD'),
-      note: this.createEventForm.value.note,
-      category: this.eventCategory,
-      name: this.createEventForm.value.name
-    };
-    const token = await this.userService.getToken();
-    if (this.isEditEvent) {
-      this.editEvent(token);
-    } else {
-      this.createEvent(token);
+    this.submitted = true;
+    if (this.createEventForm.valid) {
+      this.requestData = {
+        date: this.momentjs(new Date(this.createEventForm.value.date)).format('YYYY-MM-DD'),
+        note: this.createEventForm.value.note,
+        category: this.eventCategory,
+        name: this.createEventForm.value.name
+      };
+      const token = await this.userService.getToken();
+      if (this.isEditEvent) {
+        this.editEvent(token);
+      } else {
+        this.createEvent(token);
+      }
     }
   }
 

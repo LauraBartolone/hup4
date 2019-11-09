@@ -22,11 +22,17 @@
         <ion-label color="secondary" position="stacked">{{ 'createEventPage.eventName' | translate}}</ion-label>
         <ion-input type="text" formControlName="name"></ion-input>
       </ion-item>
+      <div *ngIf="submitted && f.name.errors" class="form-error">
+        <p *ngIf="f.name.errors?.required">Event name is required</p>
+      </div>
 
       <ion-item color="transparent" lines="none" class="ion-no-padding">
           <ion-label color="secondary" position="stacked">{{ 'createEventPage.eventDate' | translate}}</ion-label>
           <ion-datetime max="2050" [min]="minDate" color="secondary" displayFormat="DD/MM/YYYY" formControlName="date"></ion-datetime>
       </ion-item>
+      <div *ngIf="submitted && f.name.errors" class="form-error">
+        <p *ngIf="f.date.errors?.required">Event date is required</p>
+      </div>
 
       <ion-item color="transparent" lines="none" class="ion-no-padding">
         <ion-label color="secondary" position="stacked">{{ 'createEventPage.eventNote' | translate}}</ion-label>

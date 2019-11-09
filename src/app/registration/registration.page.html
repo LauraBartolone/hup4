@@ -34,7 +34,7 @@
       </ion-item>
       <div *ngIf="submitted && f.password2.errors" class="form-error">
         <p *ngIf="f.password1.errors?.required">Password is required</p>
-        <p *ngIf="f.password1.hasError('minlength')">La password deve essere di almeno 8 caratteri</p>
+        <p *ngIf="f.password1.hasError('minlength')">Minimum password length: 8 chars</p>
       </div>
 
       <ion-item color="transparent" lines="none" no-padding>

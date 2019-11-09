@@ -122,7 +122,10 @@ button[disabled] {
   }
 
   ion-toast.toast-success {
-    --background: rgb(94, 126, 94);
-}
+    --background: rgb(125, 189, 150);
+  }
+  [type=button], [type=reset], [type=submit], button {
+    -webkit-appearance: none;
+  }
 
 }
