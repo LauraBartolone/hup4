@@ -10,7 +10,7 @@
 <ion-content padding class="bg-primary-gradient">
   <div class="text-white">
     <div class="text-center avatar">
-      <img [src]="eventImg">
+      <img [src]="eventImg" (click)="openGallery()">
       <ion-fab class="small-fab" (click)="openGallery()">
         <ion-fab-button color="secondary">
           <ion-icon name="md-create"></ion-icon>

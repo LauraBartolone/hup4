@@ -1,10 +1,10 @@
 {
     "welcome": "Welcome!",
-    "createEvent": "Crea il mio evento!",
-    "editEvent": "Modifica evento",
-    "menuCreateEvent": "Crea evento",
-    "save": "salva",
-    "guestJoin": "Partecipa da invitato",
+    "createEvent": "Create my event!",
+    "editEvent": "Edit event",
+    "menuCreateEvent": "Create event",
+    "save": "Save",
+    "guestJoin": "Partecipate as guest",
     "whishList": {
       "title": "Bacheca auguri",
       "publicBtn": "PUBBLICA",

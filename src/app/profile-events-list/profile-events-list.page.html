@@ -13,10 +13,10 @@
     <div class="image-bg" *ngFor="let event of eventService.events">
       <img [src]="event.image ? event.image : ('assets/imgs/category-cover'+ event.category +'.jpg')">
       <ion-icon class="go-arrow" name="ios-arrow-forward"
-        (click)="goToDetailEvent(event.id)" item-left
+        item-left
       ></ion-icon>
 
-      <div class="overview">
+      <div class="overview"  (click)="goToDetailEvent(event.id)">
         <p><b>{{event.name}}</b></p>
         <p class="small">{{event.date}}</p>
         <p class="small">{{ 'profile.guestCodeLong' | translate }}: <b>{{event.code}}</b></p>

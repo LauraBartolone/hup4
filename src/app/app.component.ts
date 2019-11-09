@@ -30,14 +30,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(async () => {
-      const event = await this.storage.get('event').then(async (data) => {
-        return data;
-      });
-      if (Utils.isDefined(event)) {
-        this.navController.navigateRoot(['/dashboard', event.eventCode]);
-      }
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
       this.languageService.setInitialAppLanguage();
       if (this.platform.is('cordova')) {
         this.storage.setNative(this.nativeStorage);
@@ -47,6 +40,13 @@ export class AppComponent {
         this.storage.init(StorageType.local);
         console.log('sono nel browser!!');
       }
+      const event = await this.storage.get('event').then(async (data) => {
+        return data;
+      });
+      if (Utils.isDefined(event)) {
+        await this.navController.navigateRoot(['/dashboard', event.eventCode]);
+      }
+      this.splashScreen.hide();
     });
   }
 }
