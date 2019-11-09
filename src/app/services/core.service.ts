@@ -13,14 +13,12 @@ export class CoreService {
   ];
 constructor(private router: Router, private platform: Platform) {
     this.platform.ready().then(() => {
-      console.log('Core service init');
       this.initMenu();
     });
   }
 
   private initMenu() {
     this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((e: any) => {
-      console.log(e);
       this.getRoute(e);
     });
   }

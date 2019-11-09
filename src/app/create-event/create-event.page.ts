@@ -9,6 +9,7 @@ import { ApiService } from '../services/api.service';
 import { Utils } from '../services/utils';
 import { UserService } from '../services/user.service';
 import { Subscription } from 'rxjs';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-create-event',
@@ -36,6 +37,7 @@ export class CreateEventPage {
     public apiService: ApiService,
     public userService: UserService,
     private router: Router,
+    private storage: StorageService
     ) {
     this.createEventForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -44,7 +46,7 @@ export class CreateEventPage {
     });
     this.route.params.subscribe(params => {
       // tslint:disable-next-line:radix
-      this.eventCategory = parseInt(params.eventCategory);
+      this.eventCategory = parseInt(params.eventCategory) + 1;
       this.eventImg = 'assets/imgs/category-cover' + (this.eventCategory) + '.jpg';
     });
   }
@@ -90,10 +92,21 @@ export class CreateEventPage {
       this.requestData
     ).subscribe((resp) => {
       if (!this.apiService.hasErrors(resp)) {
+        this.setActiveEvent(resp.response);
         this.goToProfileEvents();
     } else {
       // TODO: #ERROR
     }
+    });
+  }
+
+  private setActiveEvent(resp) {
+    this.storage.set('event', {
+      eventCode: resp.code,
+      board: resp.board,
+      eventId: resp.id,
+      image: resp.image,
+      category: resp.category,
     });
   }
 
@@ -104,6 +117,7 @@ export class CreateEventPage {
     ).subscribe((resp) => {
       console.log(resp, this.apiService.hasErrors(resp));
       if (!this.apiService.hasErrors(resp)) {
+        this.setActiveEvent(resp.response);
         this.goToProfileEvents();
     } else {
       // TODO: #ERROR

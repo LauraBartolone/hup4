@@ -42,6 +42,7 @@ export class UserService {
           token: respData.response.token,
           username: data.username,
         });
+        this.isAuthenticate.next(true);
         this.redirect();
       } else {
         this.showAlert(respData.errors[0]);

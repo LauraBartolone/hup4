@@ -18,7 +18,7 @@ export class ProfileEventsListPage {
     private router: Router,
     public alertController: AlertController,
     public eventService: EventService,
-    private menu: MenuService,) {
+    private menu: MenuService) {
     }
 
   public goToDetailEvent(eventId) {

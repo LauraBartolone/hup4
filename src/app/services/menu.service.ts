@@ -16,4 +16,8 @@ export class MenuService {
   public toggle() {
     this.menu.toggle('slidingMenu');
   }
+
+  public close() {
+    this.menu.close();
+  }
 }

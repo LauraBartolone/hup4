@@ -48,7 +48,7 @@ export class HomePage {
           this.navController.navigateRoot(['/dashboard', this.homeForm.value.code]);
         } else {
           console.log(respData);
-          this.errorCode = 'codice errato';
+          this.errorCode = 'wrong code';
         }
       });
     }

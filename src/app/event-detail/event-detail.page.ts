@@ -77,7 +77,7 @@ export class EventDetailPage implements OnInit {
   }
 
   public goToCreateEventPage() {
-    this.router.navigate(['/create-event', this.event.category], {
+    this.router.navigate(['/create-event', (this.event.category - 1) ], {
       queryParams: {
          id: this.event.id,
          name: this.event.name,

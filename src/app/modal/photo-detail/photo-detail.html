@@ -12,7 +12,7 @@
     <ion-spinner *ngIf="!show" color="secondary" name="dots"
       class="h-100 m-auto"
     ></ion-spinner>
-    <ion-slides pager="true" class="slider-custom" [options]="slideOpts"
+    <ion-slides pager="false" class="slider-custom" [options]="slideOpts"
     (ionSlideReachEnd)="next()"
     (ionSlidesDidLoad)="init()">
       <ion-slide *ngFor="let photo of photosService.pictures" class="h-auto">
