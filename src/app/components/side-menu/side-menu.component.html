@@ -33,6 +33,15 @@
       >
         {{link?.title}}
       </ion-item>
+
+      <ion-item *ngIf="isActiveEvent" detail (click)="leaveEvent()">
+        Leave the event
+      </ion-item>
+
+      <ion-item *ngIf="!isActiveEvent" detail (click)="joinEvent()">
+        Join the event
+      </ion-item>
+
       <ion-item *ngIf="isLoggedIn" detail (click)="logout()">
         Logout
       </ion-item>

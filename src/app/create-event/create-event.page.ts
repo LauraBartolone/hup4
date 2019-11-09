@@ -10,6 +10,7 @@ import { Utils } from '../services/utils';
 import { UserService } from '../services/user.service';
 import { Subscription } from 'rxjs';
 import { StorageService } from '../services/storage.service';
+import { EventService } from '../services/event.service';
 
 @Component({
   selector: 'app-create-event',
@@ -37,7 +38,8 @@ export class CreateEventPage {
     public apiService: ApiService,
     public userService: UserService,
     private router: Router,
-    private storage: StorageService
+    private storage: StorageService,
+    private eventService: EventService
     ) {
     this.createEventForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -108,6 +110,7 @@ export class CreateEventPage {
       image: resp.image,
       category: resp.category,
     });
+    this.eventService.isActiveEvent.next(true);
   }
 
   private createEvent(token) {

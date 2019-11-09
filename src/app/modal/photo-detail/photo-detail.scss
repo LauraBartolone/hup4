@@ -15,3 +15,16 @@ ion-content.photo-content {
     height: calc(100% - 44px);
   }
 }
+
+
+.swipe-icon {
+  position: absolute;
+  bottom: 10px;
+  height: 45px;
+  width: 45px;
+  background: rgba(30, 32, 37, 0.5);
+  border-radius: 50%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}

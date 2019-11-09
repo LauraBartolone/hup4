@@ -14,6 +14,9 @@ export class PhotoDetailModal {
   public currentIndex: number;
   public slideOpts = undefined;
 
+  private swipeCount = 0;
+  public showSwipe = true;
+
   public show = false;
 
   constructor(
@@ -28,6 +31,12 @@ export class PhotoDetailModal {
       };
   }
 
+  public hideSwipe() {
+    this.swipeCount++;
+    if (this.swipeCount > 1) {
+      this.showSwipe = false;
+    }
+  }
   public closeModal() {
     this.modalCtrl.dismiss();
   }

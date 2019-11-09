@@ -5,6 +5,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { StorageService } from '../services/storage.service';
+import { EventService } from '../services/event.service';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ export class HomePage {
     private navController: NavController,
     private apiService: ApiService,
     private storage: StorageService,
+    private eventService: EventService
     ) {
     this.homeForm = this.formBuilder.group({
       code: ['', Validators.required]
@@ -45,6 +47,7 @@ export class HomePage {
             image: respData.response.image,
             category: respData.response.category,
           });
+          this.eventService.isActiveEvent.next(true);
           this.navController.navigateRoot(['/dashboard', this.homeForm.value.code]);
         } else {
           console.log(respData);

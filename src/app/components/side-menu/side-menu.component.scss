@@ -13,6 +13,9 @@
 
 ion-menu {
   margin-top: 56px;
+  &.ios {
+    margin-top: 44px;
+  }
   &:not(.show-menu) {
     z-index: 0;
   }

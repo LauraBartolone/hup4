@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { StorageService } from './storage.service';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
@@ -12,6 +13,8 @@ import { ToastController } from '@ionic/angular';
 })
 export class EventService {
 
+  public isActiveEvent = new BehaviorSubject(false);
+
   public nextMessagesPage = 1;
   private count = 0;
 
@@ -24,7 +27,18 @@ export class EventService {
     private storageService: StorageService,
     public toastController: ToastController,
     // private photoLibrary: PhotoLibrary
-  ) { }
+  ) {
+    this.initIsActiveEvent();
+  }
+
+  public async initIsActiveEvent() {
+    const event = await this.storageService.get('event').then(async (data) => {
+      return data;
+    });
+    if (Utils.isDefined(event)) {
+      this.isActiveEvent.next(true);
+    }
+  }
 
   public async getEventList() {
     const token = await this.userService.getToken();

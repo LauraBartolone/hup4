@@ -5,6 +5,8 @@ import { NavController } from '@ionic/angular';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
+import { Utils } from '../../services/utils';
+import { EventService } from '../../services/event.service';
 
 
 export interface MenuLink {
@@ -22,6 +24,7 @@ export class SideMenuComponent implements OnInit {
 
   public menuTitle: '';
   public isLoggedIn = false;
+  public isActiveEvent = false;
   public user = undefined;
   constructor(
     public menu: MenuService,
@@ -29,7 +32,8 @@ export class SideMenuComponent implements OnInit {
     private navController: NavController,
     private userService: UserService,
     private router: Router,
-    private storage: StorageService
+    private storage: StorageService,
+    private eventService: EventService
   ) { }
 
   ngOnInit() {
@@ -40,12 +44,29 @@ export class SideMenuComponent implements OnInit {
         }
       }
     );
+    this.eventService.isActiveEvent.subscribe( async resp => {
+      this.isActiveEvent = resp;
+    }
+  );
+
     this.userService.isLoggedIn();
+  }
+
+  public leaveEvent() {
+    this.storage.remove('event');
+    this.eventService.isActiveEvent.next(false);
+    this.menu.close();
+    this.navController.navigateRoot('/');
+  }
+
+  public joinEvent() {
+    this.menu.close();
+    this.navController.navigateRoot('/home');
   }
 
   public navToPage(link: MenuLink) {
     console.log('Navigating to: ', link.linkHref);
-    this.menu.toggle();
+    this.menu.close();
     try {
       this.navController.navigateForward(link.linkHref);
     } catch (e) {
@@ -67,5 +88,6 @@ export class SideMenuComponent implements OnInit {
       url: this.router.url,
     });
     this.navController.navigateForward('login');
+    this.menu.close();
   }
 }

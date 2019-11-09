@@ -69,6 +69,7 @@ export class EventDetailPage implements OnInit {
           image: respData.response.image,
           category: respData.response.category,
         });
+        this.eventService.isActiveEvent.next(true);
         this.navController.navigateRoot(['/dashboard', this.event.code]);
       } else {
        // TODO: HANDLE ERROR
