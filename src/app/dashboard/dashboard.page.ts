@@ -1,6 +1,6 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonInfiniteScroll, ModalController, Platform } from '@ionic/angular';
+import { Component} from '@angular/core';
+import { ModalController, Platform } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { PhotoDetailModal } from '../modal/photo-detail/photo-detail';
@@ -19,10 +19,9 @@ import { ApiService } from '../services/api.service';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage {
 
   private imageResponse = [];
-  @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
 
   public event: any;
 
@@ -42,7 +41,6 @@ export class DashboardPage implements OnInit {
     this.route.params.subscribe(params => {
       // tslint:disable-next-line:radix
       this.photosService.eventCode = params.code;
-      this.photosService.getPictures();
     });
   }
 
@@ -55,6 +53,8 @@ export class DashboardPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.photosService.reloadAll();
+    this.initEvent();
     const sideLinks: MenuLink[] = [
       {
         isProtected: false,
@@ -75,10 +75,6 @@ export class DashboardPage implements OnInit {
     this.event = await this.storageService.get('event').then(async (data) => {
       return data;
     });
-  }
-
-  ngOnInit() {
-    this.initEvent();
   }
 
   public async openDetailPhotoModal(index) {

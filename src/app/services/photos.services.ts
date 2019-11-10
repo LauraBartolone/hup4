@@ -74,6 +74,7 @@ export class PhotosService {
         this.successCountUploads++;
         if (this.tryUploadCount === this.successCountUploads) {
           this.successUpload(this.successCountUploads);
+          this.reloadAll();
         }
       } else {
         // TODO: handle
@@ -100,12 +101,12 @@ export class PhotosService {
      // tslint:disable-next-line:prefer-const
      let loader = await this.loadingCtrl.create({
        spinner: 'dots',
-       message: this.getProgressBar(1)
+       message: this.getProgressBar(0)
      });
      loader.present();
 
      const interval = setInterval(() => {
-       loader.message = this.getProgressBar((this.successCountUploads * 100) / this.tryUploadCount);
+       loader.message = this.getProgressBar(((this.successCountUploads * 100) / this.tryUploadCount) || 1);
        if (this.successCountUploads === this.tryUploadCount) {
          loader.dismiss();
          this.successCountUploads = 0;
@@ -115,10 +116,13 @@ export class PhotosService {
    }
 
 
-  public reloadAll(e) {
-    console.log(e);
+  public reloadAll(e?) {
     this.nextPage = 1;
-    this.getPictures(1, undefined, e);
+    if (Utils.isDefined(e)) {
+      this.getPictures(1, undefined, e);
+    } else {
+      this.getPictures(1);
+    }
   }
 
 }
