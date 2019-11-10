@@ -75,7 +75,6 @@ export class DashboardPage implements OnInit {
     this.event = await this.storageService.get('event').then(async (data) => {
       return data;
     });
-
   }
 
   ngOnInit() {
@@ -101,14 +100,17 @@ export class DashboardPage implements OnInit {
       for (let i = 0; i < results.length; i++) {
         this.imageResponse.push('data:image/jpeg;base64,' + results[i]);
       }
+      this.photosService.tryUploadCount = results.length;
       this.uploadPhotos();
     }, (err) => { alert(err); });
   }
 
-  public async  uploadPhotos() {
+  public async uploadPhotos() {
     const eventId = await this.storageService.get('event').then(async (data) => {
       return data.eventId;
     });
+    this.photosService.successCountUploads = 0;
+    this.photosService.presentLoading();
     this.imageResponse.forEach(photo => {
       this.photosService.postImage(photo, eventId);
     });

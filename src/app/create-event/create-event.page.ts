@@ -27,7 +27,7 @@ export class CreateEventPage {
   private isEditEvent = false;
   private eventId;
 
-  public requestData;
+  public requestData = {};
   private subscription: Subscription;
 
   constructor(
@@ -78,12 +78,13 @@ export class CreateEventPage {
   public async onSubmit(ev: any) {
     this.submitted = true;
     if (this.createEventForm.valid) {
-      this.requestData = {
+      const tempRequestData = {
         date: this.momentjs(new Date(this.createEventForm.value.date)).format('YYYY-MM-DD'),
         note: this.createEventForm.value.note,
         category: this.eventCategory,
         name: this.createEventForm.value.name
       };
+      this.requestData = { ...this.requestData, ...tempRequestData };
       const token = await this.userService.getToken();
       if (this.isEditEvent) {
         this.editEvent(token);
@@ -155,7 +156,9 @@ export class CreateEventPage {
     this.camera.getPicture(options).then((imageData) => {
       this.eventImg = 'data:image/jpeg;base64,' + imageData;
       // tslint:disable-next-line:no-string-literal
-      this.requestData['image'] = this.eventImg;
+      this.requestData = {
+        image: this.eventImg
+      };
       console.log(this.eventImg);
      }, (err) => {
       // Handle error

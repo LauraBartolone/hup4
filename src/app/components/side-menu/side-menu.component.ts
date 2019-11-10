@@ -49,7 +49,6 @@ export class SideMenuComponent implements OnInit {
     }
   );
 
-    this.userService.isLoggedIn();
   }
 
   public leaveEvent() {

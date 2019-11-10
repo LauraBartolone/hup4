@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Utils } from '../services/utils';
+import { ToastController, LoadingController } from '@ionic/angular';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PhotosService {
 
+  public tryUploadCount = 0;
   public successCountUploads = 0;
 
   public eventCode: string;
@@ -21,7 +24,10 @@ export class PhotosService {
   public pictures: any[];
 
   constructor(
+    private sanitizer: DomSanitizer,
     private apiService: ApiService,
+    private toastController: ToastController,
+    private loadingCtrl: LoadingController
   ) { }
 
   public getPictures(page = 1, event?) {
@@ -63,8 +69,46 @@ export class PhotosService {
     data).subscribe((respData) => {
       if (!this.apiService.hasErrors(respData)) {
         this.successCountUploads++;
+        if (this.tryUploadCount === this.successCountUploads) {
+          this.successUpload(this.successCountUploads);
+        }
+      } else {
+        // TODO: handle
       }
     });
   }
+
+  async successUpload(photoNum) {
+    const toast = await this.toastController.create({
+      message: 'Sccusfully upload: ' + photoNum + 'photos',
+      duration: 2000,
+      cssClass: 'toast-success'
+    });
+    toast.present();
+  }
+
+  getProgressBar(percentaje): string {
+    const html: string =  '<h6>' + Math.floor(percentaje) + ' % </h6>';
+    // return this.sanitizer.bypassSecurityTrustHtml(html);
+    return html;
+   }
+
+   async presentLoading() {
+     // tslint:disable-next-line:prefer-const
+     let loader = await this.loadingCtrl.create({
+       spinner: 'dots',
+       message: this.getProgressBar(0)
+     });
+     loader.present();
+
+     const interval = setInterval(() => {
+       loader.message = this.getProgressBar((this.successCountUploads * 100) / this.tryUploadCount);
+       if (this.successCountUploads === this.tryUploadCount) {
+         loader.dismiss();
+         this.successCountUploads = 0;
+         clearInterval(interval);
+       }
+     }, 1000);
+   }
 
 }

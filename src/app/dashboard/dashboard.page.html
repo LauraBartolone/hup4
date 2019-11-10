@@ -1,6 +1,7 @@
 <ion-content class="bg-primary-gradient">
   <div class="cover-img">
-    <img [src]=" event?.image ? 'http://'+event?.image : ('assets/imgs/category-cover'+ event?.category +'.jpg')">
+    <img [src]=" event?.image ? 'http://'+event?.image :
+      (event?.category ? 'assets/imgs/category-cover'+ event?.category +'.jpg' : 'assets/imgs/splash.png')">
     <!-- event.image ? event.image : ('assets/imgs/category-cover'+ event.category +'.jpg') -->
     <div class="w-100 image-link-default">
       <p class="text-link" (click)="goToWishList()"> {{ 'dashboard.boardWishes'| translate }}
