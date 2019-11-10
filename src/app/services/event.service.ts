@@ -65,7 +65,6 @@ export class EventService {
   public downloadPhoto(eventId) {
     this.apiService.get('all-photos/?event=' + eventId, this.apiService.buildHeaders())
     .subscribe(resp => {
-      console.log(resp.response);
       resp.response.forEach(photo => {
         this.download(photo.image);
       });

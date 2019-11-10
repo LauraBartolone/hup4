@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Utils } from './utils';
 import { Observable, Observer } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class ApiService {
   // token: string;
 
   constructor(
+    private alertController: AlertController,
     private http: HttpClient,
   ) { }
 
@@ -41,9 +43,7 @@ export class ApiService {
           );
           observer.complete();
          }, error => {
-          observer.next(
-            this.buildResponse(error.status, undefined, error.error)
-          );
+          this.handleError(error);
           observer.complete();
         });
     });
@@ -59,9 +59,7 @@ export class ApiService {
           );
           observer.complete();
          }, error => {
-          observer.next(
-            this.buildResponse(error.status, undefined, error.error)
-          );
+          this.handleError(error);
           observer.complete();
         });
     });
@@ -77,12 +75,32 @@ export class ApiService {
           );
           observer.complete();
          }, error => {
-          observer.next(
-            this.buildResponse(error.status, undefined, error.error)
-          );
+          this.handleError(error);
           observer.complete();
         });
     });
+  }
+
+  handleError(error) {
+    switch (error.status) {
+      case 401: this.showError('Please login and retry.');
+                break;
+      default: this.showError();
+    }
+  }
+
+  showError(msg?) {
+    this.showAlert(msg || 'Oops something goes wrong, try again later.');
+  }
+
+  public async showAlert(msg) {
+    const alert = await this.alertController.create({
+      header: 'Error!',
+      message: msg,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
   public delete(url: string, httpOptions): Observable<any> {
@@ -95,9 +113,7 @@ export class ApiService {
         );
         observer.complete();
        }, error => {
-        observer.next(
-          this.buildResponse(error.status, undefined, error.error)
-        );
+        this.handleError(error);
         observer.complete();
       });
     });
