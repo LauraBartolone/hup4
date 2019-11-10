@@ -24,6 +24,12 @@ ion-icon.add-photos {
   margin-left: -3px;
 }
 
+
+ion-refresher.refresher {
+  top: 44px;
+  z-index: 3;
+  background: var(--ion-color-primary);
+}
 // ion-spinner {
 //   --color: var(--ion-color-secondary);
 // }

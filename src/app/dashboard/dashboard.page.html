@@ -1,4 +1,7 @@
 <ion-content class="bg-primary-gradient">
+  <ion-refresher slot="fixed" (ionRefresh)="photosService.reloadAll($event)" class="refresher">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles"></ion-refresher-content>
+  </ion-refresher>
   <div class="cover-img">
     <img [src]=" event?.image ? 'http://'+event?.image :
       (event?.category ? 'assets/imgs/category-cover'+ event?.category +'.jpg' : 'assets/imgs/splash.png')">
@@ -26,6 +29,7 @@
 </ion-button>-->
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)"
+  immediate-check="true"
   >
     <ion-infinite-scroll-content
       loadingSpinner="lines"

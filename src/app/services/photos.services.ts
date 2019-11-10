@@ -30,7 +30,7 @@ export class PhotosService {
     private loadingCtrl: LoadingController
   ) { }
 
-  public getPictures(page = 1, event?) {
+  public getPictures(page = 1, event?, refreshE?) {
     if (Utils.isDefined(this.nextPage)) {
       this.queryParam.event = this.eventCode;
       this.queryParam.page = page;
@@ -47,6 +47,9 @@ export class PhotosService {
           this.pictures.push(...respData.response.results);
           this.nextPage = respData.response.next;
           this.count = respData.response.count;
+          if (Utils.isDefined(refreshE)) {
+            refreshE.target.complete();
+          }
         }
       });
     }
@@ -110,5 +113,12 @@ export class PhotosService {
        }
      }, 1000);
    }
+
+
+  public reloadAll(e) {
+    console.log(e);
+    this.nextPage = 1;
+    this.getPictures(1, undefined, e);
+  }
 
 }
