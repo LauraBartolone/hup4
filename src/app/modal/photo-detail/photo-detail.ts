@@ -31,6 +31,14 @@ export class PhotoDetailModal {
       };
   }
 
+  public plusCurrent() {
+    this.currentIndex++;
+  }
+
+  public decrementCurrent() {
+    this.currentIndex--;
+  }
+
   public hideSwipe() {
     this.swipeCount++;
     if (this.swipeCount > 1) {

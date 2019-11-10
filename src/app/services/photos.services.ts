@@ -88,7 +88,7 @@ export class PhotosService {
   }
 
   getProgressBar(percentaje): string {
-    const html: string =  '<h6>' + Math.floor(percentaje) + ' % </h6>';
+    const html: string =  '<h6>Please wait. Completed: ' + Math.floor(percentaje) + ' %</h6>';
     // return this.sanitizer.bypassSecurityTrustHtml(html);
     return html;
    }
@@ -97,7 +97,7 @@ export class PhotosService {
      // tslint:disable-next-line:prefer-const
      let loader = await this.loadingCtrl.create({
        spinner: 'dots',
-       message: this.getProgressBar(0)
+       message: this.getProgressBar(1)
      });
      loader.present();
 

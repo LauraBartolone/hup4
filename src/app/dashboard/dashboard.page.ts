@@ -96,6 +96,7 @@ export class DashboardPage implements OnInit {
       outputType: 1, // 1 BASE 64, 0 for FILEURI
     };
     this.imagePicker.getPictures(options).then((results) => {
+      this.imageResponse = [];
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < results.length; i++) {
         this.imageResponse.push('data:image/jpeg;base64,' + results[i]);
@@ -106,11 +107,11 @@ export class DashboardPage implements OnInit {
   }
 
   public async uploadPhotos() {
+    this.photosService.presentLoading();
     const eventId = await this.storageService.get('event').then(async (data) => {
       return data.eventId;
     });
     this.photosService.successCountUploads = 0;
-    this.photosService.presentLoading();
     this.imageResponse.forEach(photo => {
       this.photosService.postImage(photo, eventId);
     });

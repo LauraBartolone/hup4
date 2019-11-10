@@ -15,9 +15,11 @@
     <ion-slides pager="false" class="slider-custom" [options]="slideOpts"
     (ionSlideReachEnd)="next()"
     (ionSlidesDidLoad)="init()"
+    (ionSlideNextEnd)="plusCurrent()"
+    (ionSlidePrevEnd)="decrementCurrent()"
     (ionSlideDidChange)="hideSwipe()">
-      <ion-slide *ngFor="let photo of photosService.pictures" class="h-auto">
-        <div class="h-100 center-image" *ngIf="show">
+      <ion-slide *ngFor="let photo of photosService.pictures; let i = index" class="h-auto">
+        <div class="h-100 center-image" *ngIf="show && ((i+1) == currentIndex || i==0 || i == currentIndex)">
           <img [src]="photo.image">
         </div>
       </ion-slide>
