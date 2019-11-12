@@ -8,7 +8,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
-
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 
 import { AppComponent } from './app.component';
@@ -64,6 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
     EventService,
     PhotosService,
     UserService,
+    PhotoLibrary,
     CoreService,
     Facebook,
     FacebookService,

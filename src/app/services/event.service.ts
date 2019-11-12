@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { UserService } from './user.service';
 import { Utils } from './utils';
-// import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { ToastController } from '@ionic/angular';
 
 
@@ -26,7 +26,7 @@ export class EventService {
     private userService: UserService,
     private storageService: StorageService,
     public toastController: ToastController,
-    // private photoLibrary: PhotoLibrary
+    private photoLibrary: PhotoLibrary
   ) {
     this.initIsActiveEvent();
   }
@@ -53,13 +53,13 @@ export class EventService {
   }
 
   private download(url) {
-    // this.photoLibrary.requestAuthorization().then(() => {
-    //   // tslint:disable-next-line:only-arrow-functions
-    //   this.photoLibrary.saveImage(url, 'Hup').then(li => {
-    //     console.log('salvata');
-    //   });
-    // })
-    // .catch(err => console.log('permissions weren\'t granted'));
+    this.photoLibrary.requestAuthorization({read: true, write: true}).then(() => {
+      // tslint:disable-next-line:only-arrow-functions
+      this.photoLibrary.saveImage(url, 'Hup').then(li => {
+        console.log('salvata', li);
+      });
+    })
+    .catch(err => console.log('permissions weren\'t granted'));
   }
 
   public downloadPhoto(eventId) {

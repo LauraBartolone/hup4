@@ -159,7 +159,6 @@ export class CreateEventPage {
       this.requestData = {
         image: this.eventImg
       };
-      console.log(this.eventImg);
      }, (err) => {
       // Handle error
      });
