@@ -34,11 +34,13 @@ export class HomePage {
 
   public onSubmit(ev: any): void {
     this.submitted = true;
+    console.log(this.submitted);
     if (this.homeForm.valid) {
       this.apiService.get(
         'event/' + this.homeForm.value.code + '/',
         this.apiService.buildHeaders(),
       ).subscribe(respData => {
+        console.log(respData);
         if (respData.code === 200) {
           this.storage.set('event', {
             eventCode: this.homeForm.value.code,
@@ -49,10 +51,12 @@ export class HomePage {
           });
           this.eventService.isActiveEvent.next(true);
           this.navController.navigateRoot(['/dashboard', this.homeForm.value.code]);
-        } else {
-          console.log(respData);
+        }
+      }, err => {
+        if (err.status === 400 || 404) {
           this.errorCode = 'wrong code';
         }
+        console.log(err);
       });
     }
   }

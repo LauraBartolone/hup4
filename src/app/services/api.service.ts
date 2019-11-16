@@ -43,8 +43,8 @@ export class ApiService {
           );
           observer.complete();
          }, error => {
+          observer.error(error);
           this.handleError(error);
-          observer.complete();
         });
     });
   }
@@ -59,8 +59,8 @@ export class ApiService {
           );
           observer.complete();
          }, error => {
+          observer.error(error);
           this.handleError(error);
-          observer.complete();
         });
     });
   }
@@ -75,17 +75,25 @@ export class ApiService {
           );
           observer.complete();
          }, error => {
+          observer.error(error);
           this.handleError(error);
-          observer.complete();
         });
     });
   }
 
   handleError(error) {
-    switch (error.status) {
-      case 401: this.showError('Please login and retry.');
-                break;
-      default: this.showError();
+    console.log(error);
+    if (error.status === 0 ||
+      error.status === 401 ||
+      error.status === 403
+    ) {
+      switch (error.status) {
+        case 401: this.showError('Please login and retry.');
+                  break;
+        case 403: this.showError('Please login and retry.');
+                  break;
+        default: this.showError();
+      }
     }
   }
 
@@ -113,8 +121,8 @@ export class ApiService {
         );
         observer.complete();
        }, error => {
+        observer.error(error);
         this.handleError(error);
-        observer.complete();
       });
     });
   }
@@ -150,6 +158,16 @@ export class ApiService {
     return Object.keys(queryObj).map(key => {
       return key + '=' + queryObj[key];
     }).join('&');
+  }
+
+  public showFormError(err) {
+    if (err.status === 400) {
+      const errObj = err.error;
+      const errorMessage = Object.keys(errObj).map(ele => {
+        return errObj[ele].join(',');
+      }).join('\r\n');
+      this.showAlert(errorMessage);
+    }
   }
 
 

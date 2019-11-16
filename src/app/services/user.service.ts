@@ -46,9 +46,9 @@ export class UserService {
         this.isAuthenticate.next(true);
         this.successGeneric();
         this.redirect();
-      } else {
-        this.showAlert(respData.errors[0]);
       }
+    }, err => {
+        this.apiService.showFormError(err);
     });
   }
 
@@ -72,9 +72,13 @@ export class UserService {
         this.successGeneric();
         this.redirect();
       } else {
-        this.showAlert(respData.errors[0]);
         this.isAuthenticate.next(false);
       }
+    }, err => {
+      loading.dismiss();
+      this.isAuthenticate.next(false);
+      console.log(err);
+      this.apiService.showFormError(err);
     });
   }
 
