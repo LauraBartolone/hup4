@@ -1,74 +1,74 @@
 {
-    "welcome": "Welcome!",
-    "createEvent": "Create my event!",
-    "editEvent": "Edit event",
-    "menuCreateEvent": "Create event",
-    "save": "Save",
-    "guestJoin": "Partecipate as guest",
-    "whishList": {
-      "title": "Bacheca auguri",
-      "publicBtn": "PUBBLICA",
-      "placeholder": "Fai il tuo augurio!"
+  "welcome": "Welcome!",
+  "createEvent": "Create my event!",
+  "editEvent": "Edit event",
+  "menuCreateEvent": "Create event",
+  "save": "Save",
+  "guestJoin": "Partecipate as guest",
+  "whishList": {
+    "title": "Wishlist",
+    "publicBtn": "PUBLISH",
+    "placeholder": "Make your wish..."
+  },
+  "home": {
+      "eventCodeTitle": "Insert event code",
+      "note": "Notes for guests",
+      "goBtn": "GO!",
+      "goBtnDetail": "GO TO THE EVENT!"
+  },
+  "error": {
+    "required": "required field",
+    "invalidCode": "Ops check your entering code"
+  },
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "register": "Signup",
+    "login": {
+      "loginTitle": "Login",
+      "btnLogin": "LOGIN",
+      "titlePage": "Login",
+      "noAccount": "Haven't you got an Account?",
+      "orLogin": "Or login through:",
+      "forgetPw": "Forget your password?",
+      "recoveryIt": "Recover it"
     },
-    "home": {
-        "eventCodeTitle": "Inserisci il codice evento",
-        "note": "Note dei festeggiati",
-        "goBtn": "VAI!",
-        "goBtnDetail": "VAI ALL'EVENTO!"
-    },
-    "error": {
-      "required": "campo obbligatorio",
-      "invalidCode": "Ops controlla che il codice inserito sia corretto."
-    },
-    "auth": {
-      "username": "Username",
-      "password": "Password",
-      "register": "Registrati",
-      "login": {
-        "loginTitle": "Login",
-        "btnLogin": "ACCEDI",
-        "titlePage": "Login",
-        "noAccount": "Non hai un'account?",
-        "orLogin": "Oppure accedi tramite:",
-        "forgetPw": "Non ricordi la tua password?",
-        "recoveryIt": "Recuperala"
-      },
-      "pleaseLoginTitle": "Per favore accedi o registrati!",
-      "pleaseLoginDescription": "Alcune funzionalità non sono disponibili se non sei loggato.",
-      "loginModalOk": "Ok, accedo subito!",
-      "notNow": "Non ora"
-    },
-    "profile": {
-      "eventListTitle": "I miei eventi",
-      "eventDetailTitle": "Dettaglio Evento",
-      "eventCode": "Codice evento: ",
-      "eventCodeDescription": "Condividi il codice con i tuoi invitati! Invitali a scaricare la nostra APP!",
-      "eventCodeDescription2": "Usa i nostri pulsanti oppure invialo tramite il canale che preferisci.",
-      "guestCodeLong":"Event code for guests",
-      "warning": "Warning",
-      "unsaved": "unsaved photos will be lost! Are you sure you want to continue?"
-    },
-    "category": {
-        "wedding": "Wedding",
-        "graduate": "Graduation",
-        "party": "Party",
-        "holy": "Holy event",
-        "birthday": "Birthday"
-    },
-    "dashboard": {
-        "boardWishes": "Bacheca auguri"
-    },
-    "createEventPage": {
-        "eventName": "Nome evento",
-        "eventDate": "Data evento",
-        "eventNote": "Note per gli invitati",
-        "eventNoteSubtitle": "* Le note verranno mostrate agli invitati prima dell'inizio dell’evento",
-        "eventAdvanced": "Impostazioni avanzate",
-        "eventCreationBtn": "CREA EVENTO"
-    },
-    "createEventCategoryPage": {
-      "title": "Che tipo di evento vuoi creare?",
-      "other": "Altro"
-    }
+    "pleaseLoginTitle": "Pleas login or register!",
+    "pleaseLoginDescription": "Some features are not available if you are not logged in.",
+    "loginModalOk": "Ok, I'm entering now!",
+    "notNow": "Not now"
+  },
+  "profile": {
+    "eventListTitle": "My events",
+    "eventDetailTitle": "Event detail",
+    "eventCode": "Event code: ",
+    "eventCodeDescription": "Share the code with your guests! Invite them to download our APP!",
+    "eventCodeDescription2": "Usa i nostri pulsanti oppure invialo tramite il canale che preferisci.",
+    "guestCodeLong":"Event code for guests",
+    "warning": "Warning",
+    "unsaved": "Unsaved photos will be lost! Are you sure you want to continue?"
+  },
+  "category": {
+      "wedding": "Wedding",
+      "graduate": "Graduation",
+      "party": "Party",
+      "holy": "Holy event",
+      "birthday": "Birthday"
+  },
+  "dashboard": {
+      "boardWishes": "Wishlist"
+  },
+  "createEventPage": {
+      "eventName": "Event name",
+      "eventDate": "Event date",
+      "eventNote": "Notes for the guests",
+      "eventNoteSubtitle": "* Note will be shown to the guests before the event starts",
+      "eventAdvanced": "Advanced settings",
+      "eventCreationBtn": "CREA EVENTO"
+  },
+  "createEventCategoryPage": {
+    "title": "What kind of event would you like to create?",
+    "other": "Else"
+  }
 
 }

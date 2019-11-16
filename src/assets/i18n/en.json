@@ -1,48 +1,48 @@
 {
   "welcome": "Welcome!",
-  "createEvent": "Crea il mio evento!",
-  "editEvent": "Modifica evento",
-  "menuCreateEvent": "Crea evento",
-  "save": "salva",
-  "guestJoin": "Partecipa da invitato",
+  "createEvent": "Create my event!",
+  "editEvent": "Edit event",
+  "menuCreateEvent": "Create event",
+  "save": "Save",
+  "guestJoin": "Partecipate as guest",
   "whishList": {
-    "title": "Bacheca auguri",
-    "publicBtn": "PUBBLICA",
-    "placeholder": "Fai il tuo augurio!"
+    "title": "Wishlist",
+    "publicBtn": "PUBLISH",
+    "placeholder": "Make your wish..."
   },
   "home": {
-      "eventCodeTitle": "Inserisci il codice evento",
-      "note": "Note dei festeggiati",
-      "goBtn": "VAI!",
-      "goBtnDetail": "VAI ALL'EVENTO!"
+      "eventCodeTitle": "Insert event code",
+      "note": "Notes for guests",
+      "goBtn": "GO!",
+      "goBtnDetail": "GO TO THE EVENT!"
   },
   "error": {
-    "required": "campo obbligatorio",
-    "invalidCode": "Ops controlla che il codice inserito sia corretto."
+    "required": "required field",
+    "invalidCode": "Ops check your entering code"
   },
   "auth": {
     "username": "Username",
     "password": "Password",
-    "register": "Registrati",
+    "register": "Signup",
     "login": {
       "loginTitle": "Login",
-      "btnLogin": "ACCEDI",
+      "btnLogin": "LOGIN",
       "titlePage": "Login",
-      "noAccount": "Non hai un'account?",
-      "orLogin": "Oppure accedi tramite:",
-      "forgetPw": "Non ricordi la tua password?",
-      "recoveryIt": "Recuperala"
+      "noAccount": "Haven't you got an Account?",
+      "orLogin": "Or login through:",
+      "forgetPw": "Forget your password?",
+      "recoveryIt": "Recover it"
     },
-    "pleaseLoginTitle": "Per favore accedi o registrati!",
-    "pleaseLoginDescription": "Alcune funzionalità non sono disponibili se non sei loggato.",
-    "loginModalOk": "Ok, accedo subito!",
-    "notNow": "Non ora"
+    "pleaseLoginTitle": "Pleas login or register!",
+    "pleaseLoginDescription": "Some features are not available if you are not logged in.",
+    "loginModalOk": "Ok, I'm entering now!",
+    "notNow": "Not now"
   },
   "profile": {
-    "eventListTitle": "I miei eventi",
-    "eventDetailTitle": "Dettaglio Evento",
-    "eventCode": "Codice evento: ",
-    "eventCodeDescription": "Condividi il codice con i tuoi invitati! Invitali a scaricare la nostra APP!",
+    "eventListTitle": "My events",
+    "eventDetailTitle": "Event detail",
+    "eventCode": "Event code: ",
+    "eventCodeDescription": "Share the code with your guests! Invite them to download our APP!",
     "eventCodeDescription2": "Usa i nostri pulsanti oppure invialo tramite il canale che preferisci.",
     "guestCodeLong":"Event code for guests",
     "warning": "Warning",
@@ -56,18 +56,19 @@
       "birthday": "Birthday"
   },
   "dashboard": {
-      "boardWishes": "Bacheca auguri"
+      "boardWishes": "Wishlist"
   },
   "createEventPage": {
-      "eventName": "Nome evento",
-      "eventDate": "Data evento",
-      "eventNote": "Note per gli invitati",
-      "eventNoteSubtitle": "* Le note verranno mostrate agli invitati prima dell'inizio dell’evento",
-      "eventAdvanced": "Impostazioni avanzate",
+      "eventName": "Event name",
+      "eventDate": "Event date",
+      "eventNote": "Notes for the guests",
+      "eventNoteSubtitle": "* Note will be shown to the guests before the event starts",
+      "eventAdvanced": "Advanced settings",
       "eventCreationBtn": "CREA EVENTO"
   },
   "createEventCategoryPage": {
-    "title": "Che tipo di evento vuoi creare?",
-    "other": "Altro"
+    "title": "What kind of event would you like to create?",
+    "other": "Else"
   }
+
 }

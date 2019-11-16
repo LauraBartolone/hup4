@@ -4,13 +4,13 @@
       <ion-back-button text=""></ion-back-button>
        <!-- defaultHref="welcome" -->
     </ion-buttons>
-    <ion-title> Recupera password</ion-title>
+    <ion-title> Password recovery</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="bg-primary-gradient ion-padding">
   <div class="text-white">
-    <p class="mb-5 mt-5">Inserisci la tua email, ti manderemo una email per il recupero
+    <p class="mb-5 mt-5">Enter your email, we will send you an email for password recovery
     </p>
     <form [formGroup]="recoveryForm" (submit)="onSubmit(($event))" class="form-default">
       <ion-item color="transparent" lines="none" class="ion-no-padding">
@@ -19,7 +19,7 @@
       </ion-item>
       <ion-button type="submit" expand="block" large color="secondary" class="mt-5"
       >
-        SPEDISCI
+        SEND
       </ion-button>
     </form>
 

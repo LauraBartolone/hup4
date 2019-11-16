@@ -9,6 +9,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class PhotosService {
 
+  private loader: any;
+
   public tryUploadCount = 0;
   public successCountUploads = 0;
 
@@ -77,6 +79,9 @@ export class PhotosService {
           this.reloadAll();
         }
       } else {
+        if (Utils.isDefined(this.loader)) {
+          this.loader.dismiss();
+        }
         // TODO: handle
       }
     });
@@ -92,25 +97,25 @@ export class PhotosService {
   }
 
   getProgressBar(percentaje): string {
-    const html: string =  '<h6>Please wait. Completed: ' + Math.floor(percentaje) + ' %</h6>';
+    const html: string =  '<h6>Completed: ' + Math.floor(percentaje) + ' %</h6>';
     // return this.sanitizer.bypassSecurityTrustHtml(html);
     return html;
    }
 
-   async presentLoading() {
+  async presentLoading() {
      // tslint:disable-next-line:prefer-const
-     let loader = await this.loadingCtrl.create({
+     this.loader = await this.loadingCtrl.create({
        spinner: 'dots',
        message: this.getProgressBar(0)
      });
-     loader.present();
+     this.loader.present();
 
      const interval = setInterval(() => {
-       loader.message = this.getProgressBar(((this.successCountUploads * 100) / this.tryUploadCount) || 1);
-       if (this.successCountUploads === this.tryUploadCount) {
-         loader.dismiss();
-         this.successCountUploads = 0;
-         clearInterval(interval);
+      this.loader.message = this.getProgressBar(((this.successCountUploads * 100) / this.tryUploadCount) || 1);
+      if (this.successCountUploads === this.tryUploadCount) {
+        this.loader.dismiss();
+        this.successCountUploads = 0;
+        clearInterval(interval);
        }
      }, 1000);
    }

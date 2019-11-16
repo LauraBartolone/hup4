@@ -5,13 +5,15 @@ import { ApiService } from './api.service';
 import { UserService } from './user.service';
 import { Utils } from './utils';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
+
+  private downloadedCount = 0;
 
   public isActiveEvent = new BehaviorSubject(false);
 
@@ -26,7 +28,8 @@ export class EventService {
     private userService: UserService,
     private storageService: StorageService,
     public toastController: ToastController,
-    private photoLibrary: PhotoLibrary
+    private photoLibrary: PhotoLibrary,
+    private loadingCtrl: LoadingController,
   ) {
     this.initIsActiveEvent();
   }
@@ -52,11 +55,53 @@ export class EventService {
     return this.apiService.get('events/' + eventId + '/', this.apiService.buildHeaders(token));
   }
 
-  private download(url) {
-    this.photoLibrary.requestAuthorization({read: true, write: true}).then(() => {
-      // tslint:disable-next-line:only-arrow-functions
-      this.photoLibrary.saveImage(url, 'Hup').then(li => {
-        console.log('salvata', li);
+  getProgressBar(percentaje): string {
+    const html: string =  '<h6>Completed: ' + Math.floor(percentaje) + ' %</h6>';
+    // return this.sanitizer.bypassSecurityTrustHtml(html);
+    return html;
+   }
+
+  async successGeneric() {
+    const toast = await this.toastController.create({
+      message: 'The operation was successful!',
+      duration: 2000,
+      cssClass: 'toast-success'
+    });
+    toast.present();
+  }
+
+  private download(photos) {
+    this.downloadedCount = 0;
+    this.photoLibrary.requestAuthorization({read: true, write: true}).then(async () => {
+
+      const loader = await this.loadingCtrl.create({
+        spinner: 'dots',
+        message: this.getProgressBar(0)
+      });
+      loader.present();
+
+      const promiseArray = [];
+
+      const interval = setInterval(() => {
+        loader.message = this.getProgressBar(((this.downloadedCount * 100) / photos.length) || 1);
+        if (this.downloadedCount === photos.length) {
+          loader.dismiss();
+          clearInterval(interval);
+        }
+      }, 1000);
+
+      photos.forEach(photo => {
+        promiseArray.push(this.photoLibrary.saveImage(photo.image, 'Hup').then(e => {
+          this.downloadedCount++;
+        }));
+        Promise.all(promiseArray).then(values => {
+          loader.dismiss();
+          this.successGeneric();
+        }).catch( e => {
+          console.log(e);
+          loader.dismiss();
+          clearInterval(interval);
+        });
       });
     })
     .catch(err => console.log('permissions weren\'t granted'));
@@ -65,9 +110,8 @@ export class EventService {
   public downloadPhoto(eventId) {
     this.apiService.get('all-photos/?event=' + eventId, this.apiService.buildHeaders())
     .subscribe(resp => {
-      resp.response.forEach(photo => {
-        this.download(photo.image);
-      });
+      this.download(resp.response);
+
     });
   }
 
