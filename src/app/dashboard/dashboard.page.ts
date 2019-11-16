@@ -87,18 +87,20 @@ export class DashboardPage {
 
   public async loadPictures() {
     const options: any = {
-      quality: 100,
+      quality: 40,
       maximumImagesCount: 15,
       outputType: 1, // 1 BASE 64, 0 for FILEURI
     };
     this.imagePicker.getPictures(options).then((results) => {
       this.imageResponse = [];
-      // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < results.length; i++) {
-        this.imageResponse.push('data:image/jpeg;base64,' + results[i]);
+      if (results.length > 0) {
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < results.length; i++) {
+          this.imageResponse.push('data:image/jpeg;base64,' + results[i]);
+        }
+        this.photosService.tryUploadCount = results.length;
+        this.uploadPhotos();
       }
-      this.photosService.tryUploadCount = results.length;
-      this.uploadPhotos();
     }, (err) => { alert(err); });
   }
 

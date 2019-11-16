@@ -52,10 +52,8 @@ export class SideMenuComponent implements OnInit {
   }
 
   public leaveEvent() {
-    this.storage.remove('event');
-    this.eventService.isActiveEvent.next(false);
+    this.eventService.leaveEvent();
     this.menu.close();
-    this.navController.navigateRoot('/');
   }
 
   public joinEvent() {

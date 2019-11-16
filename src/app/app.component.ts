@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform, NavController } from '@ionic/angular';
+import { Platform, NavController, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { LanguageService } from 'src/themes/ionic/services/language.service';
@@ -10,6 +10,8 @@ import { StorageService, StorageType } from './services/storage.service';
 import { Utils } from './services/utils';
 import { UserService } from './services/user.service';
 import { EventService } from './services/event.service';
+import { NetworkService } from './services/network.service';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +29,9 @@ export class AppComponent {
     private nativeStorage: NativeStorage,
     private navController: NavController,
     private userService: UserService,
-    private eventService: EventService
+    private eventService: EventService,
+    private alertController: AlertController,
+    private network: NetworkService,
   ) {
     this.initializeApp();
   }
@@ -55,6 +59,24 @@ export class AppComponent {
       this.splashScreen.hide();
       this.userService.isLoggedIn();
       this.eventService.initIsActiveEvent();
+      this.networkSubscriber();
     });
+  }
+
+  networkSubscriber(): void {
+    this.network
+      .getNetworkStatus()
+      .pipe(debounceTime(1500))
+      .subscribe(async (connected: boolean) => {
+        if (!connected) {
+          const alert = await this.alertController.create({
+            header: 'You are not online!',
+            message: 'Please check your internet connection.',
+            buttons: ['OK']
+          });
+
+          await alert.present();
+        }
+      });
   }
 }

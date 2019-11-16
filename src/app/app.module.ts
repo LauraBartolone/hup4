@@ -11,12 +11,14 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { MenuService } from './services/menu.service';
+import { NetworkService } from './services/network.service';
 import { CoreService } from './services/core.service';
 import { ApiService } from './services/api.service';
 import { UserService } from './services/user.service';
@@ -29,6 +31,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { PhotosService } from './services/photos.services';
 import { PleaseLoginModalModule } from './modal/please-login/please-login.module';
+import { Network } from '@ionic-native/network/ngx';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -59,6 +62,8 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     MenuService,
+    Network,
+    NetworkService,
     StorageService,
     ApiService,
     EventService,

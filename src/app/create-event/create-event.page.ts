@@ -43,7 +43,7 @@ export class CreateEventPage {
     ) {
     this.createEventForm = this.formBuilder.group({
       name: ['', Validators.required],
-      note: ['', Validators.required],
+      note: [''],
       date: ['', Validators.required],
     });
     this.route.params.subscribe(params => {
@@ -124,7 +124,6 @@ export class CreateEventPage {
       this.apiService.buildHeaders(token),
       this.requestData
     ).subscribe((resp) => {
-      console.log(resp, this.apiService.hasErrors(resp));
       if (!this.apiService.hasErrors(resp)) {
         this.setActiveEvent(resp.response);
         this.goToProfileEvents();

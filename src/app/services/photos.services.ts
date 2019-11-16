@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Utils } from '../services/utils';
 import { ToastController, LoadingController } from '@ionic/angular';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+// import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { EventService } from './event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +27,11 @@ export class PhotosService {
   public pictures: any[];
 
   constructor(
-    private sanitizer: DomSanitizer,
+    // private sanitizer: DomSanitizer,
     private apiService: ApiService,
     private toastController: ToastController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private eventService: EventService,
   ) { }
 
   public getPictures(page = 1, event?, refreshE?) {
@@ -53,13 +55,16 @@ export class PhotosService {
             refreshE.target.complete();
           }
         }
+      }, err => {
+        this.eventService.leaveEvent();
       });
     }
     if (Utils.isDefined(event)) {
       event.target.complete();
-      if (this.pictures.length === this.count ) {
-        event.target.disabled = true;
-      }
+      // if (this.pictures.length === this.count ) {
+      //   console.log('diasblito');
+      //   event.target.disabled = true;
+      // }
     }
   }
 
@@ -78,11 +83,10 @@ export class PhotosService {
           this.successUpload(this.successCountUploads);
           this.reloadAll();
         }
-      } else {
-        if (Utils.isDefined(this.loader)) {
-          this.loader.dismiss();
-        }
-        // TODO: handle
+      }
+    }, err => {
+      if (Utils.isDefined(this.loader)) {
+        this.loader.dismiss();
       }
     });
   }

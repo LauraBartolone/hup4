@@ -38,18 +38,18 @@
       </p>
 
       <p class="text-center mt-5"> {{'auth.login.orLogin' | translate}} </p>
-      <div class="inline-button">
-        <ion-button type="submit" large color="secondary"
+      <!-- <div class="inline-button">
+       <ion-button type="submit" large color="secondary"
         >
         <ion-icon name="logo-google" class="mr-3"></ion-icon>
         GOOGLE
-        </ion-button>
-        <ion-button type="submit" large color="secondary" (click)="fbLogin()"
+        </ion-button>-->
+        <ion-button expand="block" type="submit" large color="secondary" (click)="fbLogin()"
         >
           <ion-icon name="logo-facebook" class="mr-3"></ion-icon>
           FACEBOOK
         </ion-button>
-      </div>
+     <!--</div>-->
 
       <p class="mt-5">{{'auth.login.forgetPw' | translate}}
         <a class="secondary-text"

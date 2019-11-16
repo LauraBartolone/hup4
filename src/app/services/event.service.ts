@@ -5,7 +5,7 @@ import { ApiService } from './api.service';
 import { UserService } from './user.service';
 import { Utils } from './utils';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
-import { ToastController, LoadingController } from '@ionic/angular';
+import { ToastController, LoadingController, NavController } from '@ionic/angular';
 
 
 @Injectable({
@@ -30,6 +30,7 @@ export class EventService {
     public toastController: ToastController,
     private photoLibrary: PhotoLibrary,
     private loadingCtrl: LoadingController,
+    private navController: NavController,
   ) {
     this.initIsActiveEvent();
   }
@@ -53,6 +54,12 @@ export class EventService {
   public async getEvent(eventId) {
     const token = await this.userService.getToken();
     return this.apiService.get('events/' + eventId + '/', this.apiService.buildHeaders(token));
+  }
+
+  public leaveEvent() {
+    this.storageService.remove('event');
+    this.isActiveEvent.next(false);
+    this.navController.navigateRoot('/');
   }
 
   getProgressBar(percentaje): string {
